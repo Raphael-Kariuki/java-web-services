@@ -12,30 +12,51 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 /**
  *
  * @author mo
  */
 public class PersonService {
+
     Connection conn;
 
-    public PersonService(){
+    /**
+     *
+     */
+    public PersonService() {
         try {
-            String jdbcUrl = "jdbc:postgresql://localhost:5432/";
-            String dbName = "crud";
+//            String jdbcUrl = "jdbc:postgresql://localhost:5432/";
+//            String dbName = "crud";
             String dbUser = "mo";
-            String dbUserPass = "mo..";
-
+            String dbUserPass = "nvUSrEu09nbp7mxAFmPJM6MB8";
+//            
+            String jdbcUrl = "jdbc:postgresql://db1.mojay:5432/crud";
+            Properties props = new Properties();
+            props.setProperty("user", dbUser);
+            props.setProperty("password", dbUserPass);
+            props.setProperty("ssl", "true");
+            props.setProperty("sslrootcert", "/home/mo/postgres_certs/root.crt");
+            
+                    
+                    
             Class.forName("org.postgresql.Driver");
-            conn = DriverManager.getConnection(String.format(jdbcUrl+dbName), dbUser, dbUserPass);
+//            conn = DriverManager.getConnection(String.format(jdbcUrl + dbName), dbUser, dbUserPass);
+            conn = DriverManager.getConnection(jdbcUrl, props);
+            System.out.println("Success conn");
         } catch (ClassNotFoundException | SQLException e) {
             System.out.println(" " + e.getMessage());
         }
 
     }
 
-    public PersonModel insertPerson(PersonModel person){
+    /**
+     *
+     * @param person
+     * @return
+     */
+    public PersonModel insertPerson(PersonModel person) {
         String insertSQLString = "insert into person(firstName, lastName, age, height) values (?,?,?,?)";
         String status = null;
         try {
@@ -47,16 +68,21 @@ public class PersonService {
 
             status = String.valueOf(insertPreparedStatement.executeUpdate());
 
-    }catch(SQLException e){
+        } catch (SQLException e) {
             status = e.getMessage();
-    }
+        }
         return person;
-}
+    }
 
-    public String insertPatientrecords(Patientdetails newPatient){
+    /**
+     *
+     * @param newPatient
+     * @return
+     */
+    public String insertPatientrecords(Patientdetails newPatient) {
         String insertSQLString = "insert into patientdetails( mrn,salutation,firsttime,pfirstname,pmiddlename,plastname,pdob,"
-                + "pphonenumber,pcountry,pcounty,  nokfirstname,  nokmiddlename,noklastname,  nokdob,  nokphonenumber,\n" +
-"             nokcountry,  nokcounty,  log_ts) values(?,?,?,?,?,?,CAST(? as date),?,?,?,?,?,?,CAST(? as date),?,?,?,DEFAULT)";
+                + "pphonenumber,pcountry,pcounty,  nokfirstname,  nokmiddlename,noklastname,  nokdob,  nokphonenumber,\n"
+                + "             nokcountry,  nokcounty,  log_ts) values(?,?,?,?,?,?,CAST(? as date),?,?,?,?,?,?,CAST(? as date),?,?,?,DEFAULT)";
         String status = null;
         System.out.println("" + newPatient.getFirsttime());
         try {
@@ -81,19 +107,25 @@ public class PersonService {
 
             status = String.valueOf(insertPreparedStatement.executeUpdate());
 
-    }catch(SQLException e){
+        } catch (SQLException e) {
             status = e.getMessage();
-    }
+        }
         return status;
-}
-    public String registerSystemUser(Systemusers newUser){
+    }
+
+    /**
+     *
+     * @param newUser
+     * @return
+     */
+    public String registerSystemUser(Systemusers newUser) {
         /*
         INSERT INTO systemusers (username, firstname, lastname, emailaddress, password, log_ts)
 	VALUES (?,?,?,?,?, DEFAULT)
 
-        */
-        String insertSQLString = " INSERT INTO systemusers (username, firstname, lastname, emailaddress, password, log_ts) \n" +
-"	VALUES (?,?,?,?,?, DEFAULT)";
+         */
+        String insertSQLString = " INSERT INTO systemusers (username, firstname, lastname, emailaddress, password, log_ts) \n"
+                + "	VALUES (?,?,?,?,?, DEFAULT)";
         PreparedStatement registerUserPreparedStatement = null;
         String status = null;
         try {
@@ -105,15 +137,19 @@ public class PersonService {
             registerUserPreparedStatement.setString(5, newUser.getPassword());
             status = "" + registerUserPreparedStatement.executeUpdate();
 
-
-    }catch(SQLException e){
+        } catch (SQLException e) {
             status = e.getMessage();
-                        System.out.println("" + status);
+            System.out.println("" + status);
 
-    }
+        }
         return status;
-}
-    public List<PersonModel> getallPerson() throws SQLException{
+    }
+
+    /**
+     *
+     * @return @throws SQLException
+     */
+    public List<PersonModel> getallPerson() throws SQLException {
         List<PersonModel> dataFromDb = new ArrayList<>();
 
         String selectQuery = "select entryid,* from person";
@@ -136,9 +172,14 @@ public class PersonService {
         } catch (SQLException e) {
             System.out.println("" + e.getMessage());
         }
-       return dataFromDb;
+        return dataFromDb;
     }
-    public List<Patientdetails> getallPatientDetails() throws SQLException{
+
+    /**
+     *
+     * @return @throws SQLException
+     */
+    public List<Patientdetails> getallPatientDetails() throws SQLException {
         List<Patientdetails> patientDataFromDb = new ArrayList<>();
 
         String selectQuery = "select entryid,* from public.patientdetails limit 100";
@@ -174,25 +215,37 @@ public class PersonService {
         } catch (SQLException e) {
             System.out.println("" + e.getMessage());
         }
-       return patientDataFromDb;
+        return patientDataFromDb;
     }
-    public String deletePatientDetailsByMRN(String mrn){
-    
+
+    /**
+     *
+     * @param mrn
+     * @return
+     */
+    public String deletePatientDetailsByMRN(String mrn) {
+
         String deleteQuery = "delete from public.patientdetails where mrn =  ?";
         PreparedStatement preparedStatement = null;
         String status = null;
-        
+
         try {
             preparedStatement = conn.prepareStatement(deleteQuery);
             preparedStatement.setString(1, mrn);
-            
+
             status = String.valueOf(preparedStatement.executeUpdate());
         } catch (SQLException e) {
             status = e.getMessage();
         }
         return status;
     }
-    public Patientdetails getPatientDetailsByMRN(String mrn){
+
+    /**
+     *
+     * @param mrn
+     * @return
+     */
+    public Patientdetails getPatientDetailsByMRN(String mrn) {
         String getQuery = "select entryid,* from public.patientdetails where mrn = ?";
         PreparedStatement preparedStatement = null;
         String status = null;
@@ -202,8 +255,7 @@ public class PersonService {
             preparedStatement = conn.prepareStatement(getQuery);
             preparedStatement.setString(1, mrn);
             resultSet = preparedStatement.executeQuery();
-            
-            
+
             while (resultSet.next()) {
                 singlePatientdetails.setEntryid(Integer.parseInt(resultSet.getString("entryid")));
                 singlePatientdetails.setMrn(resultSet.getString("mrn"));
@@ -223,21 +275,29 @@ public class PersonService {
                 singlePatientdetails.setNokphonenumber(resultSet.getString("nokphonenumber"));
                 singlePatientdetails.setNokcountry(resultSet.getString("nokcountry"));
                 singlePatientdetails.setNokcounty(resultSet.getString("nokcounty"));
-                
+
             }
             status = "1";
         } catch (SQLException e) {
             status = e.getMessage();
         }
-    return singlePatientdetails;
+        return singlePatientdetails;
     }
-        //why special, method that executes an update should be a PUT, I use POST because forms support 2 methods GET and POST. It works
-    public String specialUpdatePatientDetailsByMRN(Patientdetails updatePatientdetails, String mrn){
+    //why special, method that executes an update should be a PUT, I use POST because forms support 2 methods GET and POST. It works
+
+    /**
+     *
+     * @param updatePatientdetails
+     * @param mrn
+     * @return
+     */
+    public String specialUpdatePatientDetailsByMRN(
+            Patientdetails updatePatientdetails, String mrn) {
         /*
         mrn,salutation,firsttime,pfirstname,pmiddlname,plastname,pdob,"
                 + "pphonenumber,pcountry,pcounty,  nokfirstname,  nokmiddlename,noklastname,  nokdob,  nokphonenumber,\n" +
 "             nokcountry,  nokcounty
-        */
+         */
         String updateQuery = "update public.patientdetails set salutation = ?,firsttime = ?,pfirstname = ?,pmiddlename =? ,plastname = ?,pdob = CAST(? as date) ,"
                 + "pphonenumber = ?,pcountry = ?,pcounty = ?,  nokfirstname = ?,  nokmiddlename = ?,noklastname = ? ,  nokdob = CAST(? as date),  nokphonenumber = ?,"
                 + "nokcountry = ?,  nokcounty = ? where mrn = ? ";
@@ -271,14 +331,20 @@ public class PersonService {
         }
         return updateStatus;
     }
-    public PersonModel getPersonById(int id) throws SQLException{
+
+    /**
+     *
+     * @param id
+     * @return
+     * @throws SQLException
+     */
+    public PersonModel getPersonById(int id) throws SQLException {
 
         String selectQuery = "select * from person where entryid = ?";
 
         PreparedStatement selectPreparedStatement = null;
         ResultSet rs = null;
         PersonModel person = new PersonModel();
-
 
         try {
             selectPreparedStatement = conn.prepareStatement(selectQuery);
@@ -296,9 +362,15 @@ public class PersonService {
         } catch (SQLException e) {
             System.out.println("" + e.getMessage());
         }
-       return person;
+        return person;
     }
-    public int deletePersonById(int id){
+
+    /**
+     *
+     * @param id
+     * @return
+     */
+    public int deletePersonById(int id) {
         String deleteQuery = "delete from person where entryid = ?";
 
         PreparedStatement deletePreparedStatement = null;
@@ -312,7 +384,7 @@ public class PersonService {
             *int executeUpdate() - Executes the SQL statement in this PreparedStatement object,
                 which must be an SQL Data Manipulation Language (DML) statement, such as INSERT, UPDATE or DELETE;
                 or an SQL statement that returns nothing, such as a DDL statement.
-            */
+             */
             deleteStatus = deletePreparedStatement.executeUpdate();
         } catch (SQLException e) {
             System.out.println("" + e.getMessage());
@@ -320,7 +392,13 @@ public class PersonService {
         return deleteStatus;
     }
 
-    public String updatePersonById(PersonModel newPerson, int id){
+    /**
+     *
+     * @param newPerson
+     * @param id
+     * @return
+     */
+    public String updatePersonById(PersonModel newPerson, int id) {
         String updateQuery = "update public.person set firstname = ?, lastname = ?, age = ?, height = ? where entryid = ?";
         PreparedStatement updatePreparedStatement = null;
         Integer updateStatus = null;
@@ -343,7 +421,14 @@ public class PersonService {
         return errorMessage;
     }
     //why special, method that executes an update should be a PUT, I use POST because forms support 2 methods GET and POST. It works
-    public int specialUpdatePersonById(PersonModel newPerson, int id){
+
+    /**
+     *
+     * @param newPerson
+     * @param id
+     * @return
+     */
+    public int specialUpdatePersonById(PersonModel newPerson, int id) {
         String updateQuery = "update public.person set firstname = ?, lastname = ?, age = ?, height = ? where entryid = ?";
         PreparedStatement updatePreparedStatement = null;
         Integer updateStatus = null;
@@ -365,7 +450,14 @@ public class PersonService {
         }
         return updateStatus;
     }
-    public String patchPersonById(PersonModel newPerson, int id){
+
+    /**
+     *
+     * @param newPerson
+     * @param id
+     * @return
+     */
+    public String patchPersonById(PersonModel newPerson, int id) {
         String updateQuery = "update public.person set firstname = ? where entryid = ?";
         PreparedStatement updatePreparedStatement = null;
         Integer updateStatus = null;
@@ -385,14 +477,20 @@ public class PersonService {
         return errorMessage;
     }
 
-    public Systemusers checkLogin(String username, String password){
+    /**
+     *
+     * @param username
+     * @param password
+     * @return
+     */
+    public Systemusers checkLogin(String username, String password) {
         Systemusers loginUser = new Systemusers();
 
         String loginCheckSelectQuery = "select * from public.systemusers where public.systemusers.username = ? and public.systemusers.password = ?";
         PreparedStatement preparedLoginCheckPreparedStatement = null;
-        ResultSet rs  = null;
+        ResultSet rs = null;
         String error = "No such user found";
-        System.out.println(username + " "+password);
+        System.out.println(username + " " + password);
         try {
             preparedLoginCheckPreparedStatement = conn.prepareStatement(loginCheckSelectQuery);
             preparedLoginCheckPreparedStatement.setString(1, username);
@@ -404,7 +502,7 @@ public class PersonService {
 
                 loginUser.setUsername(rs.getString("username"));
                 loginUser.setEmailaddress(rs.getString("emailaddress"));
-            }else{
+            } else {
                 System.out.println("" + error);
             }
 
@@ -413,6 +511,5 @@ public class PersonService {
         }
         return loginUser;
     }
-
 
 }
