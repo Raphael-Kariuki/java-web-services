@@ -40,14 +40,22 @@ public class runnerClass {
 //        thread1.start();
 //        thread2.start();
 
-        //supplier interface - defines a single method get - implementation receives no argument 
-        //but produces a result
-        //Can be used to delay the computation of a value until when it's needed, result obtained by calling .get()
-        int var1 = 34, var2 = 23;
-        Supplier<Integer> summation = () -> Integer.sum(var1, var2);
-        System.out.println("" + summation.get());
-        Supplier<Double> x = () -> Math.random();
-        System.out.println("" + x.get());
+//        //supplier interface - defines a single method get - implementation receives no argument 
+//        //but produces a result
+//        //Can be used to delay the computation of a value until when it's needed, result obtained by calling .get()
+//        int var1 = 34, var2 = 23;
+//        Supplier<Integer> summation = () -> Integer.sum(var1, var2);
+//        System.out.println("" + summation.get());
+//        Supplier<Double> x = () -> Math.random();
+//        System.out.println("" + x.get());
+
+        
+        //Predicate interface - returns true or false on calling .test()
+        Predicate<Integer> x = val -> val > 0;
+        System.out.println("" + x.test(23));
+        Predicate<Integer> y = x.negate();
+        System.out.println("" + y.test(23));  
+
     }
 }
 // class StreamProcessor {
