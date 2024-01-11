@@ -48,15 +48,26 @@ public class runnerClass {
 //        System.out.println("" + summation.get());
 //        Supplier<Double> x = () -> Math.random();
 //        System.out.println("" + x.get());
+//
+//        
+//        //Predicate interface - returns true or false on calling .test()
+//        Predicate<Integer> x = val -> val > 0;
+//        System.out.println("" + x.test(23));
+//        Predicate<Integer> y = x.negate();
+//        System.out.println("" + y.test(23));  
+//
+        //Consumer interface - accepts a single argument. the accept method accepts the arguments with no return value
+        Consumer<String[]> consumer = runnerClass::displayPrompt;
+        //        displayPrompt("Mojay", "Hello");
+        consumer.accept(new String[]{"Hello", "Mojay"});
+ 
 
-        
-        //Predicate interface - returns true or false on calling .test()
-        Predicate<Integer> x = val -> val > 0;
-        System.out.println("" + x.test(23));
-        Predicate<Integer> y = x.negate();
-        System.out.println("" + y.test(23));  
 
     }
+        public static void displayPrompt(String[] name) {
+        System.out.println("" + name[0] + " ," + name[1]);
+    }
+
 }
 // class StreamProcessor {
 //
