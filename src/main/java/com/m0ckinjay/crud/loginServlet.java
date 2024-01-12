@@ -12,7 +12,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
-
+import java.util.Arrays;
+import java.util.Optional;
 
 /**
  *
@@ -34,26 +35,53 @@ public class loginServlet extends HttpServlet {
             throws ServletException, IOException {
 //        response.setContentType("text/html;charset=UTF-8");
 
-            //get values from form parameters
-            String username = request.getParameter("loginusername");
-            String password = request.getParameter("loginpassword");
+        //get values from form parameters
+        String username = request.getParameter("loginusername");
+        char[] password = request.getParameter("loginpassword").toCharArray();
+
+        //obtain instance of service class that handles db transactions
+        PersonService personService = new PersonService();
+        
+        
+        try {
             
-            PersonService personService = new PersonService();
-            try {
-                Systemusers checkLoginUser  = personService.checkLogin(username, password);
+            //obtain loaded or empty user object
+            Optional<Systemusers> checkLoginUser = personService.updatedCheckLogin(username, password);
+            //initialize destination page
+            String destPage = null;
+            
+            //only proceed if user object has content which signifies presence of credentials
+            if (checkLoginUser.isPresent()) {
+                //get rid of obtain password
+                Arrays.fill(password, Character.MIN_VALUE);
+
                 System.out.println("LogiUser: " + checkLoginUser);
-                String destPage = "/JSPs/signUp.jsp";
                 
-                if (checkLoginUser.getUsername() != null) {
+                //set default dest page to signup,
+                destPage = "/JSPs/signUp.jsp";
+
+                //presence of username in user object ensures that login check was successful
+                if (checkLoginUser.get().getUsername() != null && checkLoginUser.get().getUsername().equals(username)) {
                     HttpSession session = request.getSession();
-                    session.setAttribute("user", checkLoginUser);
+                    
+                    //set an attribute of the user object that will be used as session attributes
+                    session.setAttribute("user", checkLoginUser.get());
+                    
+                    //redirect to next page coz login successful
                     destPage = "/JSPs/patientDetailsView.jsp";
-                }else{
-                    String message =  "No such user found";
+                } else {
+                    //TODO - Handles the different erro where a user enters wrong credentials vs 
+                    //when the user object isn't setup well for one reason or the other
+                    String message = "No such user found, re-enter credentials";
                     request.setAttribute("errorMessage", message);
                 }
-                RequestDispatcher dispatcher = request.getRequestDispatcher(destPage);
-                dispatcher.forward(request, response);
+            } else {
+                String message = "Error during login, please try again";
+                request.setAttribute("errorMessage", message);
+            }
+
+            RequestDispatcher dispatcher = request.getRequestDispatcher(destPage);
+            dispatcher.forward(request, response);
         } catch (ServletException | IOException e) {
             throw new ServletException(e.getMessage());
         }
