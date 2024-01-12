@@ -63,7 +63,7 @@ public class passwordHashing {
     private static final String ALGORITHMN = "PBKDF2WithHmacSHA512";
 
     
-    private static Optional<String> hashPassword(String password, String salt) {
+    private static Optional<String> hashPassword(char [] password, String salt) {
 
         /*We work with password in the form of a char array rather than as a string
         This is because Strings are immutable, what will happen when we  
@@ -71,15 +71,15 @@ public class passwordHashing {
         String, with char[], we simply call Arrays.fill(char[], value_to_fill with)
          */
         //get password and turn to char array - from user
-        char[] chars = password.toCharArray();
+//        char[] chars = password.toCharArray();
 
         //get the encode salt(String) back to bytes
         byte[] bytes = salt.getBytes();
 
         //password based encryption - password and salt are cloned before use
-        PBEKeySpec spec = new PBEKeySpec(chars, bytes, ITERATIONS, KEY_LENGTH);
+        PBEKeySpec spec = new PBEKeySpec(password, bytes, ITERATIONS, KEY_LENGTH);
 
-        Arrays.fill(chars, Character.MIN_VALUE);
+        Arrays.fill(password, Character.MIN_VALUE);
 
         try {
             //get algorithmn
@@ -111,7 +111,7 @@ public class passwordHashing {
      * @param salt
      * @return boolean True or False depending on the password supplied
      */
-    public static boolean verifyPassword(String password, String key,
+    public static boolean verifyPassword(char [] password, String key,
             String salt) {
         Optional<String> optEncrypted = hashPassword(password, salt);
         if (optEncrypted.isEmpty()) {
@@ -135,7 +135,7 @@ public class passwordHashing {
         }
         else if(password.isPresent() && password.get().length() >5) {
             Optional<String> salt = generateSalt(25);
-            Optional<String> hashedPassword = hashPassword(password.get(), salt.get());
+            Optional<String> hashedPassword = hashPassword(password.get().toCharArray(), salt.get());
             hashString[0] =  hashedPassword.get();
             hashString[1] =  salt.get();
             
@@ -150,13 +150,14 @@ public class passwordHashing {
     public static void main(String[] args) {
         Optional<String> salt = generateSalt(25);
         System.out.println("Salt: " + salt.get() + "Length: " + +salt.get().length());
-        Optional<String> hashedPassword = hashPassword("Hello", salt.get());
+        Optional<String> hashedPassword = hashPassword("Hello".toCharArray(), salt.get());
         System.out.println("Hashed password: " + hashedPassword.get() + " Length: " + hashedPassword.get().length());
 
-        boolean match = verifyPassword("Hello", hashedPassword.get(), salt.get());
-        boolean match2 = verifyPassword("hello", hashedPassword.get(), salt.get());
+        boolean match = verifyPassword("Hello".toCharArray(), hashedPassword.get(), salt.get());
+        boolean match2 = verifyPassword("hello".toCharArray(), hashedPassword.get(), salt.get());
 
-        System.out.println("Match1: " + match);
+        System.out.print("Match1: " + match + "Char array length: " );
+        System.out.println( (hashedPassword.get().toCharArray()).length);
         System.out.println("Match2: " + match2);
 //  //Get list available algorithmns that can be used for hashing      
 //        List<String> algorithms = Arrays.stream(Security.getProviders())
