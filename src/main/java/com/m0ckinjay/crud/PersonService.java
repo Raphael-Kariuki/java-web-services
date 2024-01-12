@@ -11,8 +11,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.Properties;
+import java.util.logging.Logger;
+
+import runner.passwordHashing;
 
 /**
  *
@@ -38,9 +43,7 @@ public class PersonService {
             props.setProperty("password", dbUserPass);
             props.setProperty("ssl", "true");
             props.setProperty("sslrootcert", "/home/mo/postgres_certs/root.crt");
-            
-                    
-                    
+
             Class.forName("org.postgresql.Driver");
 //            conn = DriverManager.getConnection(String.format(jdbcUrl + dbName), dbUser, dbUserPass);
             conn = DriverManager.getConnection(jdbcUrl, props);
@@ -124,17 +127,25 @@ public class PersonService {
 	VALUES (?,?,?,?,?, DEFAULT)
 
          */
-        String insertSQLString = " INSERT INTO systemusers (username, firstname, lastname, emailaddress, password, log_ts) \n"
-                + "	VALUES (?,?,?,?,?, DEFAULT)";
+        String insertSQLString = " INSERT INTO systemusers (username, firstname, lastname, emailaddress, password, log_ts, password_salt) \n"
+                + "	VALUES (?,?,?,?,?, DEFAULT,?)";
         PreparedStatement registerUserPreparedStatement = null;
+        String[] hashedPasswd = new String[2];
         String status = null;
         try {
+            try {
+                //hash password before insert
+                hashedPasswd = passwordHashing.makeHashedPassword(Optional.of(newUser.getPassword()));
+            } catch (Exception e) {
+                System.err.println("Error mangling the password");
+            }
             registerUserPreparedStatement = conn.prepareStatement(insertSQLString);
             registerUserPreparedStatement.setString(1, newUser.getUsername());
             registerUserPreparedStatement.setString(2, newUser.getFirstname());
             registerUserPreparedStatement.setString(3, newUser.getLastname());
             registerUserPreparedStatement.setString(4, newUser.getEmailaddress());
-            registerUserPreparedStatement.setString(5, newUser.getPassword());
+            registerUserPreparedStatement.setString(5, hashedPasswd[0]);
+            registerUserPreparedStatement.setString(6, hashedPasswd[1]);
             status = "" + registerUserPreparedStatement.executeUpdate();
 
         } catch (SQLException e) {
@@ -509,6 +520,64 @@ public class PersonService {
         } catch (SQLException e) {
             System.out.println("Exception" + e.getMessage());
         }
+        return loginUser;
+    }
+
+    /**
+     * How to setup the loginCheck
+     * 1. Get username and password from servlet - passed as args to method 
+     * 2. Get user details from db(emailAddress,password -key(in verifying the user), password_salt - salt in verifying the user) 
+     * For security reasons we should work with password as char array
+     * Meaning we have to modify the hashing process to receive charArray
+     *
+     * @param username
+     * @param password
+     * @return userObject class 
+     *
+     */
+    public Optional<Systemusers> updatedCheckLogin(String username,
+            char [] password) {
+        Optional<Systemusers> loginUser = Optional.of(new Systemusers());
+
+        if (username.isEmpty() || username.equals("") || password.length < 1 || password.equals("")) {
+            System.err.println("Blank password or Username");
+            loginUser = Optional.empty();
+        } else {
+            String loginCheckQuery = "SELECT emailaddress, password, password_salt FROM public.systemusers where username = ?";
+            ResultSet rs = null;
+            PreparedStatement preparedStatement = null;
+            char[] inputPasswdCharArray = password;
+
+            String dbPasswdKey = null;
+            String emailAddress = null;
+            String password_salt = null;
+            try {
+                preparedStatement = conn.prepareStatement(loginCheckQuery);
+                preparedStatement.setString(1, username);
+                rs = preparedStatement.executeQuery();
+
+                if (rs.next()) {
+                    dbPasswdKey = rs.getString("password");
+                    emailAddress = rs.getString("emailaddress");
+                    password_salt = rs.getString("password_salt");
+                }
+            } catch (SQLException e) {
+                System.out.println("Error getting details from Db " + e.getMessage());
+            }
+            
+            //confirm password supplied matches that in the database
+            Boolean confirmPassword = passwordHashing.verifyPassword(inputPasswdCharArray, dbPasswdKey, password_salt);
+            
+            //get rid of password
+            Arrays.fill(inputPasswdCharArray, Character.MIN_VALUE);
+
+            //after all checks setup the user object 
+            if (confirmPassword) {
+                loginUser.get().setUsername(username);
+                loginUser.get().setEmailaddress(emailAddress);
+            }
+        }
+
         return loginUser;
     }
 
