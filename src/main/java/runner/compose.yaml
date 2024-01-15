@@ -1,0 +1,36 @@
+services:
+    postgresql:
+        build:
+            context: .
+            dockerfile: postgresql
+        container_name: java_web_postgresql
+        restart: unless-stopped
+        user: postgres
+        ports:
+            - "5433:5432"
+        environment:
+            - POSTGRES_USER=mo
+            - POSTGRES_PASSWORD=nvUSrEu09nbp7mxAFmPJM6MB8
+        command: postgres -c ssl=on -c ssl_cert_file=/var/lib/postgresql/server.crt -c ssl_key_file=/var/lib/postgresql/server.key -c ssl_ca_file=/var/lib/postgresql/root.crt
+        volumes:
+            - "/home/mo/Projects/Docker/data:/var/lib/postgresql/data"
+            - "/home/mo/Projects/Docker/certs/root.crt:/var/lib/postgresql/root.crt:ro"
+            - "/home/mo/Projects/Docker/certs/server.crt:/var/lib/postgresql/server.crt:ro"
+            - "/home/mo/Projects/Docker/certs/server.key:/var/lib/postgresql/server.key:ro"
+        networks:
+            backend:
+                ipv4_address: 172.2.0.2
+            
+networks:
+  frontend:
+    name: custom_frontendNet
+    enable_ipv6: false
+    ipam:
+      config:
+        - subnet: 172.1.0.0/29
+  backend:
+    name: custom_backendNet
+    enable_ipv6: false
+    ipam:
+      config:
+        - subnet: 172.2.0.0/29
