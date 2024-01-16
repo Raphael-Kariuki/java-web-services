@@ -202,7 +202,7 @@
                 border-radius: 5px;
             }
             input[type="date"] + span::after{
-                padding-left: 5px; 
+                padding-left: 5px;
             }
             input[type="date"]:invalid + span::after{
                 content: "✖";
@@ -412,11 +412,11 @@
                         </div>
                     </div>
                     <div class="row">
-<!--                        <div class="inputs">
-                            <label for="ptAge">Age
-                                <input class="2save" id="ptAge" type="text"  name="ptAge" readonly/>
-                            </label>
-                        </div>-->
+                        <!--                        <div class="inputs">
+                                                    <label for="ptAge">Age
+                                                        <input class="2save" id="ptAge" type="text"  name="ptAge" readonly/>
+                                                    </label>
+                                                </div>-->
                         <div class="inputs">
                             <label for="ptDOB"> Date of Birth 
                                 <sup>*</sup>
@@ -487,12 +487,12 @@
                 <div class="tab">Patient other Details:
                     <div class="inputs">
                         <label class="form-control" >
-                            <input class="2save" id="ptNHIFRegistered" type="checkbox"  name="ptNHIFRegistered"/>
+                            <input class="2save" id="ptNHIFRegistered" type="checkbox"  name="ptNHIFRegistered" value="isNHIFregistered"/>
                             NHIF registered
                         </label>
-                        <input class="2save" id="ptNHIFRegisteredChildren" type="text"  name="ptNHIFRegisteredChildren" placeholder="No of children"/>
+                        <input class="2save isNHIFRegisteredDependendents" id="ptNHIFRegisteredChildren" type="text"  name="ptNHIFRegisteredChildren" placeholder="No of children" />
                     </div>
-                    <p><input class="2save" placeholder="NHIF claim number" oninput="this.className = ''" type="text" name="ptNHIFClaimNo"></p>
+                    <p><input class="2save isNHIFRegisteredDependendents" placeholder="NHIF claim number" oninput="this.className = ''" type="text" name="ptNHIFClaimNo" ></p>
                     <p><input class="2save" placeholder="Old file number" oninput="this.className = ''" type="text" name="ptOldFileNumber"></p>
                     <p><input class="2save" placeholder="Other numbers" oninput="this.className = ''" type="text" name="ptOtherNo"></p>
                 </div>
@@ -527,21 +527,39 @@
             </form>
 
             <script>
+                //TODO set readOnly for NHIF registered dependants works on the first reload, fails after. To check
+                const ptNHIFRegisteredCheckBox = document.getElementById('ptNHIFRegistered');
+                let ptNHIFRegisteredCheckBoxDependants = document.getElementsByClassName('isNHIFRegisteredDependendents');
+
+                ptNHIFRegisteredCheckBox.onchange = nhifValue;
+                //function to set nhif related input to readonly
+                function nhifValue() {
+                    if (ptNHIFRegisteredCheckBox.checked) {
+                        ptNHIFRegisteredCheckBoxDependants[0].readOnly = false;
+                        ptNHIFRegisteredCheckBoxDependants[1].readOnly = false;
+                    } else {
+//                      ptNHIFRegisteredCheckBoxDependants[0].value = '';
+//                      ptNHIFRegisteredCheckBoxDependants[1].value = '';
+                        ptNHIFRegisteredCheckBoxDependants[0].readOnly = true;
+                        ptNHIFRegisteredCheckBoxDependants[1].readOnly = true;
+                    }
+                }
+
                 //set min and max programatically
                 const dateInput = document.querySelector("input[type='date']");
                 let date = new Date();
                 var [month, day, year] = [
-                  date.getMonth() + 1,
-                  date.getDate(),
-                  date.getFullYear()
+                    date.getMonth() + 1,
+                    date.getDate(),
+                    date.getFullYear()
                 ];
 
-                if(month < 10){
-                  month = '0' + month;
+                if (month < 10) {
+                    month = '0' + month;
                 }
-                dateInput.max = year +'-'+ month + '-'+ day;
+                dateInput.max = year + '-' + month + '-' + day;
                 dateInput.min = '1970-01-01';
-                
+
                 var currentTab = 0; // Current tab is set to be the first tab (0)
                 showTab(currentTab); // Display the current tab
 
@@ -617,31 +635,30 @@
                     //... and adds the "active" class on the current step:
                     x[n].className += " active";
                 }
-                function temporarySaveFormData(){
+                function temporarySaveFormData() {
                     var x, y, inputsToSave = [];
                     x = document.getElementsByClassName('tab');
                     y = x[currentTab].getElementsByClassName('2save');
-                    
-                    
-                    for(i = 0; i < y.length; i++){
-                        const obj = {};
-                        if (y[i].tagName === 'INPUT' && y[i].type === 'radio' && y[i].checked === true){
-                            obj[y[i].name] = y[i].value;
-                            inputsToSave.push(obj);  
-                            }
-                        else if(y[i].tagName === 'INPUT' && y[i].type !== 'radio' ) {
-                            obj[y[i].name] = y[i].value;
-                            inputsToSave.push(obj); 
-                        }else if(y[i].tagName === 'SELECT'){
-                            obj[y[i].name] = y[i].value;
-                            inputsToSave.push(obj); 
-                            }
 
-  
+
+                    for (i = 0; i < y.length; i++) {
+                        const obj = {};
+                        if (y[i].tagName === 'INPUT' && y[i].type === 'radio' && y[i].checked === true) {
+                            obj[y[i].name] = y[i].value;
+                            inputsToSave.push(obj);
+                        } else if (y[i].tagName === 'INPUT' && y[i].type !== 'radio') {
+                            obj[y[i].name] = y[i].value;
+                            inputsToSave.push(obj);
+                        } else if (y[i].tagName === 'SELECT') {
+                            obj[y[i].name] = y[i].value;
+                            inputsToSave.push(obj);
+                        }
+
+
                     }
-//                    console.log(inputsToSave);
-                    sessionStorage.setItem("form-data", JSON.stringify(inputsToSave));
-                    
+                    console.log(inputsToSave);
+                    sessionStorage.setItem("form-data-tab-" + currentTab, JSON.stringify(inputsToSave));
+
                 }
             </script>
         </div>
