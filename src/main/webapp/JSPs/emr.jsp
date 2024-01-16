@@ -618,27 +618,29 @@
                     x[n].className += " active";
                 }
                 function temporarySaveFormData(){
-                    var x = document.getElementsByClassName('tab');
-                    var y = x[currentTab].getElementsByClassName('2save');
+                    var x, y, inputsToSave = [];
+                    x = document.getElementsByClassName('tab');
+                    y = x[currentTab].getElementsByClassName('2save');
                     
-                    var inputs2Save = [];
                     
-                    for(i = 0; i < x.length; i++){
+                    for(i = 0; i < y.length; i++){
                         const obj = {};
-                        if (x[i].tagName === 'INPUT' && x[i].type === 'radio' && x[i].checked === true){
-                            obj[x[i].name] = x[i].value;
+                        if (y[i].tagName === 'INPUT' && y[i].type === 'radio' && y[i].checked === true){
+                            obj[y[i].name] = y[i].value;
                             inputsToSave.push(obj);  
                             }
-                        else if(x[i].tagName === 'INPUT' && x[i].type !== 'radio' ) {
-                            obj[x[i].name] = x[i].value;
+                        else if(y[i].tagName === 'INPUT' && y[i].type !== 'radio' ) {
+                            obj[y[i].name] = y[i].value;
                             inputsToSave.push(obj); 
-                        }else if(x[i].tagName === 'SELECT'){
-                            obj[x[i].name] = x[i].value;
+                        }else if(y[i].tagName === 'SELECT'){
+                            obj[y[i].name] = y[i].value;
                             inputsToSave.push(obj); 
                             }
-                    sessionStorage.setItem("form-data", JSON.stringify(inputsToSave))
+
   
-}
+                    }
+//                    console.log(inputsToSave);
+                    sessionStorage.setItem("form-data", JSON.stringify(inputsToSave));
                     
                 }
             </script>
