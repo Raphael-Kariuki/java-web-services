@@ -592,6 +592,30 @@
                     //... and adds the "active" class on the current step:
                     x[n].className += " active";
                 }
+                function temporarySaveFormData(){
+                    var x = document.getElementsByClassName('tab');
+                    var y = x[currentTab].getElementsByClassName('2save');
+                    
+                    var inputs2Save = [];
+                    
+                    for(i = 0; i < x.length; i++){
+                        const obj = {};
+                        if (x[i].tagName === 'INPUT' && x[i].type === 'radio' && x[i].checked === true){
+                            obj[x[i].name] = x[i].value;
+                            inputsToSave.push(obj);  
+                            }
+                        else if(x[i].tagName === 'INPUT' && x[i].type !== 'radio' ) {
+                            obj[x[i].name] = x[i].value;
+                            inputsToSave.push(obj); 
+                        }else if(x[i].tagName === 'SELECT'){
+                            obj[x[i].name] = x[i].value;
+                            inputsToSave.push(obj); 
+                            }
+                    sessionStorage.setItem("form-data", JSON.stringify(inputsToSave))
+  
+}
+                    
+                }
             </script>
         </div>
     </body>
