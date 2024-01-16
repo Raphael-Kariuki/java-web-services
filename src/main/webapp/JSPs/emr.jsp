@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Patient Registration</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 
@@ -328,7 +328,7 @@
                     <div class="row">
                         <div class="inputs">
                             <label for="ptRegServicePoint">Registration Service Point</label>
-                            <select  id="ptRegServicePoint" name="ptRegServicePoint" required >
+                            <select class="2save" id="ptRegServicePoint" name="ptRegServicePoint" required >
                                 <option value="">Select</option>
                                 <option value="In-Patient">In-Patient</option>
                                 <option value="Out-Patient">Out-Patient</option>
@@ -336,7 +336,7 @@
                         </div>
                         <div class="inputs">
                             <label for="ptUrgency">Patient Urgency</label>
-                            <select  id="ptUrgency" name="ptUrgency" required >
+                            <select class="2save" id="ptUrgency" name="ptUrgency" required >
                                 <option value="">Select</option>
                                 <option value="Normal">Normal</option>
                                 <option value="Emergency">Emergency</option>
@@ -344,13 +344,13 @@
                         </div>
                     </div>
                     <div class="row">
-                        <p><input placeholder="Last name..." oninput="this.className = ''" name="ptLname"></p>
-                        <p><input placeholder="Other names..." oninput="this.className = ''" name="ptOtherNames"></p>
+                        <p><input class="2save" placeholder="Last name..." oninput="this.className = ''" name="ptLname"></p>
+                        <p><input class="2save" placeholder="Other names..." oninput="this.className = ''" name="ptOtherNames"></p>
                     </div>
                     <div class="row">
                         <div class="inputs">
                             <label for="specialtyClinic">Specialty Clinic</label>
-                            <select  id="specialtyClinic" name="specialtyClinic" required >
+                            <select class="2save"  id="specialtyClinic" name="specialtyClinic" required >
                                 <option value="">Select</option>
                                 <option value="Casualty">Casualty</option>
                                 <option value="Clinics">Clinics</option>
@@ -361,7 +361,7 @@
                                 <option value="Eye">Eye</option>
                             </select>   
                         </div>
-                        <p><input placeholder="C Sheet Number..." oninput="this.className = ''" name="ptCSheetNo"></p>
+                        <p><input class="2save" placeholder="C Sheet Number..." oninput="this.className = ''" name="ptCSheetNo"></p>
                     </div>
                     <div class="row">
                         <div class="inputs">
@@ -369,11 +369,11 @@
 
 
                             <label for="ptGenderM">
-                                <input id="ptGenderM" type="radio"  name="ptGender"/>
+                                <input class="2save" id="ptGenderM" type="radio"  name="ptGender" value="Male"/>
                                 Male     
                             </label>
                             <label for="ptGenderF">
-                                <input id="ptGenderF" type="radio"  name="ptGender"/>
+                                <input class="2save" id="ptGenderF" type="radio"  name="ptGender" value="Female"/>
                                 Female     
                             </label>
                         </div>
@@ -381,23 +381,23 @@
                             <label >Marital status </label>
 
                             <label for="ptMaritalStatusS">
-                                <input id="ptMaritalStatusS" type="radio"  name="ptMaritalStatus"/>
+                                <input class="2save" id="ptMaritalStatusS" type="radio"  name="ptMaritalStatus" value="Single"/>
 
                                 Single  </label>
 
                             <label for="ptMaritalStatusM">
-                                <input id="ptMaritalStatusM" type="radio"  name="ptMaritalStatus"/>
+                                <input class="2save" id="ptMaritalStatusM" type="radio"  name="ptMaritalStatus" value="Married"/>
 
                                 Married  </label>
 
 
                             <label for="ptMaritalStatusD">
-                                <input id="ptMaritalStatusD" type="radio"  name="ptMaritalStatus"/>
+                                <input class="2save" id="ptMaritalStatusD" type="radio"  name="ptMaritalStatus" value="Divorced"/>
 
                                 Divorced </label>
 
                             <label for="ptMaritalStatusW">
-                                <input id="ptMaritalStatusW" type="radio"  name="ptMaritalStatus"/>
+                                <input class="2save" id="ptMaritalStatusW" type="radio"  name="ptMaritalStatus" value="Widowed"/>
 
                                 Widowed</label>
 
@@ -406,13 +406,13 @@
                     <div class="row">
                         <div class="inputs">
                             <label for="ptAge">Age
-                                <input id="ptAge" type="text"  name="ptAge" readonly/>
+                                <input class="2save" id="ptAge" type="text"  name="ptAge" readonly/>
                             </label>
                         </div>
                         <div class="inputs">
                             <label for="ptDOB"> Date of Birth 
                                 <sup>*</sup>
-                                <input id="ptDOB" type="date"  name="ptDOB" required />
+                                <input class="2save" id="ptDOB" type="date"  name="ptDOB" required />
 
                             </label>
 
@@ -421,7 +421,7 @@
                     <div class="row">
                         <div class="inputs">
                             <label> Patient with disability  </label>
-                            <select  id="ptDisabled" name="ptDisabled" required >
+                            <select class="2save" id="ptDisabled" name="ptDisabled" required >
                                 <option value="">Select</option>
                                 <option value="Yes">Yes</option>
                                 <option value="No">No</option>
@@ -430,7 +430,7 @@
                         </div>
                         <div class="inputs">
                             <label for="ptAuthority">Authority</label>
-                            <select  id="ptAuthority" name="ptAuthority" required >
+                            <select class="2save" id="ptAuthority" name="ptAuthority" required >
                                 <option value="">Select</option>
                                 <option value="Voluntary">Voluntary</option>
                                 <option value="Involuntary">Involuntary</option>
@@ -442,14 +442,14 @@
 
                 </div>
                 <div class="tab">Contact Info:
-                    <p><input placeholder="ID Number..." oninput="this.className = ''" name="ptIDNo"></p>
-                    <p><input placeholder="E-mail..." oninput="this.className = ''" name="ptEmailAddress"></p>
-                    <p><input placeholder="Phone..." oninput="this.className = ''" name="ptPhoneNumber"></p>
+                    <p><input class="2save" placeholder="ID Number..." oninput="this.className = ''" name="ptIDNo"></p>
+                    <p><input class="2save" placeholder="E-mail..." oninput="this.className = ''" name="ptEmailAddress"></p>
+                    <p><input class="2save" placeholder="Phone..." oninput="this.className = ''" name="ptPhoneNumber"></p>
                 </div>
                 <div class="tab">Patient residence details:
                     <div class="inputs">
                         <label for="ptNationality">Nationality</label>
-                        <select  id="ptNationality" name="ptNationality" required >
+                        <select class="2save"  id="ptNationality" name="ptNationality" required >
                             <option value="">Select</option>
                             <option value="Kenya">Kenya</option>
                             <option value="Uganda">Uganda</option>
@@ -458,7 +458,7 @@
                     </div>
                     <div class="inputs">
                         <label for="ptCounty">County</label>
-                        <select  id="ptCounty" name="ptCounty" required >
+                        <select class="2save" id="ptCounty" name="ptCounty" required >
                             <option value="">Select</option>
                             <option value="Garissa">Garissa</option>
                         </select>
@@ -466,47 +466,47 @@
 
                     <div class="inputs">
                         <label for="ptSubCounty">Sub County</label>
-                        <select  id="ptSubCounty" name="ptSubCounty" required >
+                        <select class="2save" id="ptSubCounty" name="ptSubCounty" required >
                             <option value="">Select</option>
                             <option value="Igoji">Igoji</option>
                         </select>
                     </div>
-                    <p><input placeholder="Postal address" oninput="this.className = ''" name="ptPostalAddress"></p>
-                    <p><input placeholder="Home Village" oninput="this.className = ''" name="ptHomeVillage"></p>
-                    <p><input placeholder="Physical residence" oninput="this.className = ''" name="ptPhysicalResidence"></p>
-                    <p><input placeholder="Place of Birth" oninput="this.className = ''" name="ptPlaceOfBirth"></p>
+                    <p><input class="2save" placeholder="Postal address" oninput="this.className = ''" name="ptPostalAddress"></p>
+                    <p><input class="2save" placeholder="Home Village" oninput="this.className = ''" name="ptHomeVillage"></p>
+                    <p><input class="2save" placeholder="Physical residence" oninput="this.className = ''" name="ptPhysicalResidence"></p>
+                    <p><input class="2save" placeholder="Place of Birth" oninput="this.className = ''" name="ptPlaceOfBirth"></p>
                 </div>
                 <div class="tab">Patient other Details:
                     <div class="inputs">
                         <label class="form-control" >
-                            <input id="ptNHIFRegistered" type="checkbox"  name="ptNHIFRegistered"/>
+                            <input class="2save" id="ptNHIFRegistered" type="checkbox"  name="ptNHIFRegistered"/>
                             NHIF registered
                         </label>
-                        <input id="ptNHIFRegisteredChildren" type="text"  name="ptNHIFRegisteredChildren" placeholder="No of children"/>
+                        <input class="2save" id="ptNHIFRegisteredChildren" type="text"  name="ptNHIFRegisteredChildren" placeholder="No of children"/>
                     </div>
-                    <p><input placeholder="NHIF claim number" oninput="this.className = ''" type="text" name="ptNHIFClaimNo"></p>
-                    <p><input placeholder="Old file number" oninput="this.className = ''" type="text" name="ptOldFileNumber"></p>
-                    <p><input placeholder="Other numbers" oninput="this.className = ''" type="text" name="ptOtherNo"></p>
+                    <p><input class="2save" placeholder="NHIF claim number" oninput="this.className = ''" type="text" name="ptNHIFClaimNo"></p>
+                    <p><input class="2save" placeholder="Old file number" oninput="this.className = ''" type="text" name="ptOldFileNumber"></p>
+                    <p><input class="2save" placeholder="Other numbers" oninput="this.className = ''" type="text" name="ptOtherNo"></p>
                 </div>
                 <div class="tab">Next of kin details:
                     <div class="inputs"> 
-                        <input id="ptBroughtByNOK" type="radio"   value="NOK" name="ptBroughtBy"/>
+                        <input class="2save" id="ptBroughtByNOK" type="radio"   value="NOK" name="ptBroughtBy"/>
                         <label for="ptBroughtByNOK"> Next of Kin </label>
-                        <input id="ptBroughtByGoodSamaritan" type="radio" value="GoodSamaritan"  name="ptBroughtBy"/>
+                        <input class="2save" id="ptBroughtByGoodSamaritan" type="radio" value="GoodSamaritan"  name="ptBroughtBy"/>
                         <label for="ptBroughtByGoodSamaritan"> Good samaritan </label>
 
                     </div>
-                    <p><input placeholder="NOK Full Name..." oninput="this.className = ''" name="ptNOKFullName" type="text"></p>
-                    <p><input placeholder="NOK Relation..." oninput="this.className = ''" name="ptNOKRelation" type="text"></p>
-                    <p><input placeholder="NOK ID/Passport No..." oninput="this.className = ''" name="ptNOKID_PassportNo" type="text"></p>
-                    <p><input placeholder="NOK Phone No..." oninput="this.className = ''" name="ptNOKPhoneNo" type="tel"></p>
-                    <p><input placeholder="NOK Postal Address..." oninput="this.className = ''" name="ptNOKPostalAddress" type="text"></p>
-                    <p><input placeholder="NOK Physical Residence..." oninput="this.className = ''" name="ptNOKPhysicalResidence" type="text"></p>
+                    <p><input class="2save" placeholder="NOK Full Name..." oninput="this.className = ''" name="ptNOKFullName" type="text"></p>
+                    <p><input class="2save" placeholder="NOK Relation..." oninput="this.className = ''" name="ptNOKRelation" type="text"></p>
+                    <p><input class="2save" placeholder="NOK ID/Passport No..." oninput="this.className = ''" name="ptNOKID_PassportNo" type="text"></p>
+                    <p><input class="2save" placeholder="NOK Phone No..." oninput="this.className = ''" name="ptNOKPhoneNo" type="tel"></p>
+                    <p><input class="2save" placeholder="NOK Postal Address..." oninput="this.className = ''" name="ptNOKPostalAddress" type="text"></p>
+                    <p><input class="2save" placeholder="NOK Physical Residence..." oninput="this.className = ''" name="ptNOKPhysicalResidence" type="text"></p>
                 </div>
                 <div class="tab">Referral Details:
-                    <p><input placeholder="Referral type..." oninput="this.className = ''" name="ptReferralType"></p>
-                    <p><input placeholder="Referral Facility.." oninput="this.className = ''" name="ptReferralfacility"></p>
-                    <p><input placeholder="Referral County..." oninput="this.className = ''" name="ptRReferralCounty"></p>
+                    <p><input class="2save" placeholder="Referral type..." oninput="this.className = ''" name="ptReferralType"></p>
+                    <p><input class="2save" placeholder="Referral Facility.." oninput="this.className = ''" name="ptReferralfacility"></p>
+                    <p><input class="2save" placeholder="Referral County..." oninput="this.className = ''" name="ptRReferralCounty"></p>
                 </div>
                 <div style="overflow:auto;">
                     <div style="float:right;">
@@ -545,8 +545,8 @@
                     // This function will figure out which tab to display
                     var x = document.getElementsByClassName("tab");
                     // Exit the function if any field in the current tab is invalid:
-//                    if (n === 1 && !validateForm())
-//                        return false;
+                    if (n === 1 && !validateForm())
+                        return false;
                     // Hide the current tab:
                     x[currentTab].style.display = "none";
                     // Increase or decrease the current tab by 1:
