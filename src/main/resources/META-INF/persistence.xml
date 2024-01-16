@@ -3,6 +3,7 @@
   <persistence-unit name="com.m0ckinjay_crud_war_1.0PU" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
     <class>com.m0ckinjay.crud.patient.Systemusers</class>
+    <class>com.m0ckinjay.crud.PersonModel</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/crud"/>
