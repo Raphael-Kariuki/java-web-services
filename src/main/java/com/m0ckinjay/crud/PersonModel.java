@@ -4,48 +4,53 @@
  */
 package com.m0ckinjay.crud;
 
+import jakarta.persistence.Basic;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  *
  * @author mo
  */
-//@Entity
-//@Table(catalog = "crud", schema = "public")
-//@NamedQueries({
-//    @NamedQuery(name = "Person.findAll", query = "SELECT p FROM Person p"),
-//    @NamedQuery(name = "Person.findByEntryid", query = "SELECT p FROM Person p WHERE p.entryid = :entryid"),
-//    @NamedQuery(name = "Person.findByFirstname", query = "SELECT p FROM Person p WHERE p.firstname = :firstname"),
-//    @NamedQuery(name = "Person.findByLastname", query = "SELECT p FROM Person p WHERE p.lastname = :lastname"),
-//    @NamedQuery(name = "Person.findByAge", query = "SELECT p FROM Person p WHERE p.age = :age"),
-//    @NamedQuery(name = "Person.findByHeight", query = "SELECT p FROM Person p WHERE p.height = :height"),
-//    @NamedQuery(name = "Person.findByLogTs", query = "SELECT p FROM Person p WHERE p.logTs = :logTs")})
+@Entity
+@Table(name = "person")
+@NamedQueries({
+    @NamedQuery(name = "PersonModel.findAll", query = "SELECT p FROM PersonModel p"),
+    @NamedQuery(name = "PersonModel.findByEntryid", query = "SELECT p FROM PersonModel p WHERE p.entryid = :entryid"),
+    @NamedQuery(name = "PersonModel.findByFirstname", query = "SELECT p FROM PersonModel p WHERE p.firstname = :firstname"),
+    @NamedQuery(name = "PersonModel.findByLastname", query = "SELECT p FROM PersonModel p WHERE p.lastname = :lastname"),
+    @NamedQuery(name = "PersonModel.findByAge", query = "SELECT p FROM PersonModel p WHERE p.age = :age"),
+    @NamedQuery(name = "PersonModel.findByHeight", query = "SELECT p FROM PersonModel p WHERE p.height = :height"),
+    @NamedQuery(name = "PersonModel.findByLogTs", query = "SELECT p FROM PersonModel p WHERE p.logTs = :logTs")})
 public class PersonModel implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @Column(name = "entryid")
     private Integer entryid;
     @Basic(optional = false)
+    @Column(name = "firstname")
     private String firstname;
     @Basic(optional = false)
+    @Column(name = "lastname")
     private String lastname;
     @Basic(optional = false)
+    @Column(name = "age")
     private int age;
     @Basic(optional = false)
+    @Column(name = "height")
     private double height;
     @Basic(optional = false)
     @Column(name = "log_ts")
@@ -59,8 +64,8 @@ public class PersonModel implements Serializable {
         this.entryid = entryid;
     }
 
-    public PersonModel(Integer entryid, String firstname, String lastname, int age,
-            double height, Date logTs) {
+    public PersonModel(Integer entryid, String firstname, String lastname,
+            int age, double height, Date logTs) {
         this.entryid = entryid;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -139,7 +144,7 @@ public class PersonModel implements Serializable {
 
     @Override
     public String toString() {
-        return "com.m0ckinjay.crud.Person[ entryid=" + entryid + " ]";
+        return "com.m0ckinjay.crud.PersonModel[ entryid=" + entryid + " ]";
     }
     
 }
