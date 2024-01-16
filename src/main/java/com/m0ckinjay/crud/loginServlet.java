@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Optional;
+import com.m0ckinjay.crud.patient.Systemusers;
 
 /**
  *
@@ -46,7 +47,7 @@ public class loginServlet extends HttpServlet {
         try {
             
             //obtain loaded or empty user object
-            Optional<Systemusers> checkLoginUser = personService.updatedCheckLogin(username, password);
+            Optional<Systemusers> checkLoginUser = personService.finalUpdatedCheckLogin(username, password);
             //initialize destination page
             String destPage = null;
             
