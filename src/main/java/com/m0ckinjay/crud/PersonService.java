@@ -4,7 +4,9 @@
  */
 package com.m0ckinjay.crud;
 
+import com.m0ckinjay.crud.patient.DBUser;
 import com.m0ckinjay.crud.patient.Patientdetails;
+import com.m0ckinjay.crud.patient.Systemusers;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -15,7 +17,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.Properties;
-import java.util.logging.Logger;
 
 import runner.passwordHashing;
 
@@ -42,6 +43,7 @@ public class PersonService {
             props.setProperty("user", dbUser);
             props.setProperty("password", dbUserPass);
             props.setProperty("ssl", "true");
+//            props.setProperty("sslmode", "require");
             props.setProperty("sslrootcert", "/home/mo/postgres_certs/root.crt");
 
             Class.forName("org.postgresql.Driver");
@@ -524,19 +526,20 @@ public class PersonService {
     }
 
     /**
-     * How to setup the loginCheck
-     * 1. Get username and password from servlet - passed as args to method 
-     * 2. Get user details from db(emailAddress,password -key(in verifying the user), password_salt - salt in verifying the user) 
-     * For security reasons we should work with password as char array
-     * Meaning we have to modify the hashing process to receive charArray
+     * How to setup the loginCheck 1. Get username and password from servlet -
+     * passed as args to method 2. Get user details from
+     * db(emailAddress,password -key(in verifying the user), password_salt -
+     * salt in verifying the user) For security reasons we should work with
+     * password as char array Meaning we have to modify the hashing process to
+     * receive charArray
      *
      * @param username
      * @param password
-     * @return userObject class 
+     * @return userObject class
      *
      */
     public Optional<Systemusers> updatedCheckLogin(String username,
-            char [] password) {
+            char[] password) {
         Optional<Systemusers> loginUser = Optional.of(new Systemusers());
 
         if (username.isEmpty() || username.equals("") || password.length < 1 || password.equals("")) {
@@ -564,10 +567,10 @@ public class PersonService {
             } catch (SQLException e) {
                 System.out.println("Error getting details from Db " + e.getMessage());
             }
-            
+
             //confirm password supplied matches that in the database
             Boolean confirmPassword = passwordHashing.verifyPassword(inputPasswdCharArray, dbPasswdKey, password_salt);
-            
+
             //get rid of password
             Arrays.fill(inputPasswdCharArray, Character.MIN_VALUE);
 
@@ -578,6 +581,24 @@ public class PersonService {
             }
         }
 
+        return loginUser;
+    }
+
+    public Optional<Systemusers> finalUpdatedCheckLogin(String username,
+            char[] password) {
+        Optional<Systemusers> loginUser = Optional.of(new Systemusers());
+        if (username.isEmpty() || username.equals("") || password.length < 1 || password.equals("")) {
+            System.err.println("Blank password or Username");
+            loginUser = Optional.empty();
+        } else {
+            loginUser = Optional.of(DBUser.getUser(username));
+            if (loginUser.isPresent()) {
+                passwordHashing.verifyPassword(password, loginUser.get().getPassword(), loginUser.get().getPasswordSalt());
+                Arrays.fill(password, Character.MIN_VALUE);
+            } else {
+                loginUser = Optional.empty();
+            }
+        }
         return loginUser;
     }
 
