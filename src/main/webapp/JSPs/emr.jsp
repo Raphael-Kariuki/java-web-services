@@ -201,7 +201,15 @@
                 border: 1px solid #aaaaaa;
                 border-radius: 5px;
             }
-
+            input[type="date"] + span::after{
+                padding-left: 5px; 
+            }
+            input[type="date"]:invalid + span::after{
+                content: "✖";
+            }
+            input[type="date"]:valid + span::after{
+                content: "✓";
+            }
             /* Mark input boxes that gets an error on validation: */
             input.invalid {
                 background-color: #ffdddd;
@@ -404,16 +412,16 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="inputs">
+<!--                        <div class="inputs">
                             <label for="ptAge">Age
                                 <input class="2save" id="ptAge" type="text"  name="ptAge" readonly/>
                             </label>
-                        </div>
+                        </div>-->
                         <div class="inputs">
                             <label for="ptDOB"> Date of Birth 
                                 <sup>*</sup>
                                 <input class="2save" id="ptDOB" type="date"  name="ptDOB" required />
-
+                                <span class="validity"></span>
                             </label>
 
                         </div>
@@ -519,6 +527,21 @@
             </form>
 
             <script>
+                //set min and max programatically
+                const dateInput = document.querySelector("input[type='date']");
+                let date = new Date();
+                var [month, day, year] = [
+                  date.getMonth() + 1,
+                  date.getDate(),
+                  date.getFullYear()
+                ];
+
+                if(month < 10){
+                  month = '0' + month;
+                }
+                dateInput.max = year +'-'+ month + '-'+ day;
+                dateInput.min = '1970-01-01';
+                
                 var currentTab = 0; // Current tab is set to be the first tab (0)
                 showTab(currentTab); // Display the current tab
 
