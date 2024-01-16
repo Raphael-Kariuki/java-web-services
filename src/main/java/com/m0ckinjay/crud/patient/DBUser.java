@@ -13,12 +13,18 @@ import jakarta.persistence.TypedQuery;
  * @author mo
  */
 public class DBUser {
-    public static Systemusers getUser(int entryId){
+
+    public static Systemusers getUser(String username) {
+        EntityManager em = DBUtil.getEntityManager("com.m0ckinjay_crud_war_1.0PU");
+        return em.find(Systemusers.class, username);
+    }
+
+    public static Systemusers getUser(int entryId) {
         EntityManager em = DBUtil.getEntityManager("com.m0ckinjay_crud_war_1.0PU");
         String qString = "SELECT s FROM Systemusers s WHERE s.entryid = :entryid";
-        TypedQuery<Systemusers> q = em.createQuery(qString,Systemusers.class);
+        TypedQuery<Systemusers> q = em.createQuery(qString, Systemusers.class);
         q.setParameter("entryid", entryId);
-        
+
         Systemusers user = null;
         try {
             System.out.println("Getting single user by id");
@@ -26,11 +32,11 @@ public class DBUser {
             System.out.println("" + user.getUsername());
         } catch (NoResultException e) {
             System.out.println("" + e.getMessage());
-        }finally{
-        em.close();
+        } finally {
+            em.close();
         }
-       return user;
+        return user;
 //                find(Systemusers.class, entryId);
-        
+
     }
 }
