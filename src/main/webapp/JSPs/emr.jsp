@@ -578,6 +578,8 @@
                     }
                     // If the valid status is true, mark the step as finished and valid:
                     if (valid) {
+                        //call function to save form fields values
+                        temporarySaveFormData();
                         document.getElementsByClassName("step")[currentTab].className += " finish";
                     }
                     return valid; // return the valid status
