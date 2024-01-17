@@ -15,6 +15,9 @@ import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import java.io.Serializable;
 import java.util.Date;
+import org.hibernate.annotations.CreationTimestamp;
+import static org.hibernate.annotations.GenerationTime.INSERT;
+
 
 /**
  *
@@ -56,6 +59,7 @@ public class Systemusers implements Serializable {
     private String password;
     @Basic(optional = false)
     @Column(name = "log_ts")
+    @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     private Date logTs;
     @Basic(optional = false)
