@@ -77,48 +77,48 @@ public class PersonService {
         }
         return person;
     }
-
-    /**
-     *
-     * @param newPatient
-     * @return
-     */
-    public String insertPatientrecords(Patientdetails newPatient) {
-        String insertSQLString = "insert into patientdetails( mrn,salutation,firsttime,pfirstname,pmiddlename,plastname,pdob,"
-                + "pphonenumber,pcountry,pcounty,  nokfirstname,  nokmiddlename,noklastname,  nokdob,  nokphonenumber,\n"
-                + "             nokcountry,  nokcounty,  log_ts) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,DEFAULT)";
+//
+//    /**
+//     *
+//     * @param newPatient
+//     * @return
+//     */
+//    public String insertPatientrecords(Patientdetails newPatient) {
 //        String insertSQLString = "insert into patientdetails( mrn,salutation,firsttime,pfirstname,pmiddlename,plastname,pdob,"
 //                + "pphonenumber,pcountry,pcounty,  nokfirstname,  nokmiddlename,noklastname,  nokdob,  nokphonenumber,\n"
-//                + "             nokcountry,  nokcounty,  log_ts) values(?,?,?,?,?,?,CAST(? as date),?,?,?,?,?,?,CAST(? as date),?,?,?,DEFAULT)";
-        String status = null;
-        System.out.println("" + newPatient.getFirsttime());
-        try {
-            PreparedStatement insertPreparedStatement = conn.prepareStatement(insertSQLString);
-            insertPreparedStatement.setString(1, newPatient.getMrn());
-            insertPreparedStatement.setString(2, newPatient.getSalutation());
-            insertPreparedStatement.setString(3, (((newPatient.getFirsttime()) == null) ? "false" : "true"));
-            insertPreparedStatement.setString(4, newPatient.getPfirstname());
-            insertPreparedStatement.setString(5, newPatient.getPmiddlename());
-            insertPreparedStatement.setString(6, newPatient.getPlastname());
-            insertPreparedStatement.setDate(7, new java.sql.Date(newPatient.getPdob().getTime()));
-            insertPreparedStatement.setString(8, newPatient.getPphonenumber());
-            insertPreparedStatement.setString(9, newPatient.getPcountry());
-            insertPreparedStatement.setString(10, newPatient.getPcounty());
-            insertPreparedStatement.setString(11, newPatient.getNokfirstname());
-            insertPreparedStatement.setString(12, newPatient.getNokmiddlename());
-            insertPreparedStatement.setString(13, newPatient.getNoklastname());
-            insertPreparedStatement.setDate(14, new java.sql.Date(newPatient.getNokdob().getTime()));
-            insertPreparedStatement.setString(15, newPatient.getNokphonenumber());
-            insertPreparedStatement.setString(16, newPatient.getNokcountry());
-            insertPreparedStatement.setString(17, newPatient.getNokcounty());
-
-            status = String.valueOf(insertPreparedStatement.executeUpdate());
-
-        } catch (SQLException e) {
-            status = e.getMessage();
-        }
-        return status;
-    }
+//                + "             nokcountry,  nokcounty,  log_ts) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,DEFAULT)";
+////        String insertSQLString = "insert into patientdetails( mrn,salutation,firsttime,pfirstname,pmiddlename,plastname,pdob,"
+////                + "pphonenumber,pcountry,pcounty,  nokfirstname,  nokmiddlename,noklastname,  nokdob,  nokphonenumber,\n"
+////                + "             nokcountry,  nokcounty,  log_ts) values(?,?,?,?,?,?,CAST(? as date),?,?,?,?,?,?,CAST(? as date),?,?,?,DEFAULT)";
+//        String status = null;
+//        System.out.println("" + newPatient.getFirsttime());
+//        try {
+//            PreparedStatement insertPreparedStatement = conn.prepareStatement(insertSQLString);
+//            insertPreparedStatement.setString(1, newPatient.getMrn());
+//            insertPreparedStatement.setString(2, newPatient.getSalutation());
+//            insertPreparedStatement.setString(3, (((newPatient.getFirsttime()) == null) ? "false" : "true"));
+//            insertPreparedStatement.setString(4, newPatient.getPfirstname());
+//            insertPreparedStatement.setString(5, newPatient.getPmiddlename());
+//            insertPreparedStatement.setString(6, newPatient.getPlastname());
+//            insertPreparedStatement.setDate(7, new java.sql.Date(newPatient.getPdob().getTime()));
+//            insertPreparedStatement.setString(8, newPatient.getPphonenumber());
+//            insertPreparedStatement.setString(9, newPatient.getPcountry());
+//            insertPreparedStatement.setString(10, newPatient.getPcounty());
+//            insertPreparedStatement.setString(11, newPatient.getNokfirstname());
+//            insertPreparedStatement.setString(12, newPatient.getNokmiddlename());
+//            insertPreparedStatement.setString(13, newPatient.getNoklastname());
+//            insertPreparedStatement.setDate(14, new java.sql.Date(newPatient.getNokdob().getTime()));
+//            insertPreparedStatement.setString(15, newPatient.getNokphonenumber());
+//            insertPreparedStatement.setString(16, newPatient.getNokcountry());
+//            insertPreparedStatement.setString(17, newPatient.getNokcounty());
+//
+//            status = String.valueOf(insertPreparedStatement.executeUpdate());
+//
+//        } catch (SQLException e) {
+//            status = e.getMessage();
+//        }
+//        return status;
+//    }
 
     /**
      *
