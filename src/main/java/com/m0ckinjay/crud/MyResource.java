@@ -1,5 +1,7 @@
 package com.m0ckinjay.crud;
 
+import com.m0ckinjay.crud.patient.DBUser;
+import com.m0ckinjay.crud.patient.Systemusers;
 import com.m0ckinjay.crud.patient.Patientdetails;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
@@ -21,6 +23,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import runner.passwordHashing;
 
 /**
  * Root resource (exposed at "myresource" path)
@@ -135,11 +139,21 @@ public class MyResource {
         registerUser.setFirstname(formParameters.get("firstname"));
         registerUser.setLastname(formParameters.get("lastname"));
         registerUser.setEmailaddress(formParameters.get("emailaddress"));
-        registerUser.setPassword(formParameters.get("password"));
+        String[] hashedPasswd = new String[2];
 
-        String responseInt = personService.registerSystemUser(registerUser);
+        try {
+            //hash password before insert
+            hashedPasswd = passwordHashing.makeHashedPassword(Optional.of(formParameters.get("password")));
+        } catch (Exception e) {
+            System.err.println("Error mangling the password");
+        }
+        registerUser.setPassword(hashedPasswd[0]);
+        registerUser.setPasswordSalt(hashedPasswd[1]);
+
+//        String responseInt = personService.registerSystemUser(registerUser);
+        String responseInt = new DBUser().insertNewSystemUser(registerUser);
         Response response = null;
-        if (responseInt.equals("1")) {
+        if (responseInt.equals("ok")) {
             response = Response.temporaryRedirect(URI.create("/JSPs/login.jsp")).build();
         } else {
             response = Response.status(Response.Status.NOT_IMPLEMENTED).location(new URI("/")).build();
@@ -243,7 +257,7 @@ public class MyResource {
     public Response updateByMRN(@PathParam("mrn") String mrn,
             MultivaluedMap<String, String> formDataMap) {
         Response response = null;
-        
+
         //hashMap declaration
         Map<String, String> formParameters = new HashMap<>();
 
@@ -272,14 +286,14 @@ public class MyResource {
         updatePatientdetails.setNokphonenumber(formParameters.get("_NOKphoneNumber"));
         updatePatientdetails.setNokcountry(formParameters.get("_NOKcountrySelect"));
         updatePatientdetails.setNokcounty(formParameters.get("_NOKcountySelect"));
-        
+
         String status = personService.specialUpdatePatientDetailsByMRN(updatePatientdetails, mrn);
         System.out.println("" + status);
-        
+
         response = "1".equals(status) ? Response.temporaryRedirect(URI.create("/JSPs/patientDetailsView.jsp")).build() : Response.notModified(status).build();
-        
+
         return response;
-        
+
     }
 //    @Path("{id}/update")
 //    @PUT
