@@ -5,7 +5,10 @@
 package com.m0ckinjay.crud.patient;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.NoResultException;
+import jakarta.persistence.Persistence;
 import jakarta.persistence.TypedQuery;
 
 /**
@@ -13,14 +16,20 @@ import jakarta.persistence.TypedQuery;
  * @author mo
  */
 public class DBUser {
+    private EntityManagerFactory emf = null;
+    private EntityManager em = null;
+    public DBUser(){
+        emf = Persistence.createEntityManagerFactory("com.m0ckinjay_crud_war_1.0PU");
+        
+    }
 
-    public static Systemusers getUser(String username) {
-        EntityManager em = DBUtil.getEntityManager("com.m0ckinjay_crud_war_1.0PU");
+    public  Systemusers getUser(String username) {
+        EntityManager em = emf.createEntityManager();
         return em.find(Systemusers.class, username);
     }
 
-    public static Systemusers getUser(int entryId) {
-        EntityManager em = DBUtil.getEntityManager("com.m0ckinjay_crud_war_1.0PU");
+    public Systemusers getUser(int entryId) {
+        EntityManager em = emf.createEntityManager();
         String qString = "SELECT s FROM Systemusers s WHERE s.entryid = :entryid";
         TypedQuery<Systemusers> q = em.createQuery(qString, Systemusers.class);
         q.setParameter("entryid", entryId);
@@ -38,5 +47,23 @@ public class DBUser {
         return user;
 //                find(Systemusers.class, entryId);
 
+    }
+    public String insertNewSystemUser(Systemusers newSystemUser){
+        String status = null;
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction trans = em.getTransaction();
+        try {
+            trans.begin();
+            em.persist(newSystemUser);
+            trans.commit();
+            status = "ok";
+        } catch (Exception e) {
+            e.printStackTrace();
+            trans.rollback();
+            status = "nok";
+        }finally{
+            em.close();
+        }
+        return status;
     }
 }
