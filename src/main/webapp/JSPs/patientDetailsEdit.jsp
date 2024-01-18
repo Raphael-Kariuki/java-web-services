@@ -195,8 +195,8 @@
             var mrn = getCookie("mrn");
             console.log(mrn);
             //set formaction attr on the submit button to send form data to the specialUpdate resource to update db values
-            document.getElementById("submitInput").setAttribute("formaction", "/webapi/person/patientdetails/" + mrn + "/update");
-            const singlePatientDetailsAPIURI = "/webapi/person/patientdetails/" + mrn + "/get";
+            document.getElementById("submitInput").setAttribute("formaction", "/api/v1/patient/" + mrn + "/update");
+            const singlePatientDetailsAPIURI = "/api/v1/patient/" + mrn + "/get";
             const singlePatientDetailsPromise = fetch(singlePatientDetailsAPIURI);
             singlePatientDetailsPromise
                     .then((response) => response.json())
