@@ -24,7 +24,7 @@
                         </div>
                     </div>
                     <div class="col-2 bg-dark">
-                        <a href="/logout" class="text-center text-light">Logout</a>
+                        <a href="crud/logout" class="text-center text-light">Logout</a>
                     </div>
                 </div>
             </div>
@@ -37,7 +37,7 @@
                 </div>
             </div>
             <div class="container-fluid">
-                <form class="row" action="/webapi/person/new/patient/register" method="POST">
+                <form class="row" action="/api/v1/patient/register" method="POST">
 
                     <div class="col-6">
                         <fieldset >
