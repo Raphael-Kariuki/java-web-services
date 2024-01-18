@@ -26,14 +26,12 @@
                     for (var i = 0; i < data.length; i++) {
                     var mrn = data[i].mrn;
                     var patientFullNames = data[i].pfirstname + " " + data[i].pmiddlename + " " + data[i].plastname;
-                    console.log(new Date() - data[i].pdob);
-                    //TODO - Date formatting
-                    var page = data[i].pdob;
+                    var date = dateDiffInYearsMonths(new Date(((data[i].pdob).split("Z")[0])),new Date());
                     var pphonenumber = data[i].pphonenumber;
                     table += "<tr>";
                     table += "<td>" + mrn + " </td>";
                     table += "<td>" + patientFullNames + " </td>";
-                    table += "<td>" + page + " </td>";
+                    table += "<td>" + date.years +" Years "+ date.months +" Months" + " </td>";
                     table += "<td>" + pphonenumber + " </td>";
                     table += '<td><a href="/JSPs/patientDetailsEdit.jsp" id="viewpatientdetails" name="' + mrn + '" onclick=getViewHrefValue(\"' + mrn + '\")>View</a> |';
                     table += ' <a href="#" id="deletePatientdetails" onclick=actualDeletion(\"' + mrn + '\")>Delete</a></td>';
@@ -78,6 +76,21 @@
             function redirect(){
                 window.location.href = "/JSPs/patientDetails.jsp";
             }
+            
+            //function to return years and months from dob
+            function dateDiffInYearsMonths(startDate, endDate) {
+                // Calculate the difference in months
+                var monthsDiff = (endDate.getFullYear() - startDate.getFullYear()) * 12 +
+                    (endDate.getMonth() - startDate.getMonth());
+
+                // Calculate years and remaining months
+                var years = Math.floor(monthsDiff / 12);
+                var remainingMonths = monthsDiff % 12;
+
+                return { years: years, months: remainingMonths };
+            }
+
+
         </script>
 
         <nav class="navbar">
