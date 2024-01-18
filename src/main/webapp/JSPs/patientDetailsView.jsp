@@ -57,7 +57,7 @@
             }
             function actualDeletion(mrn) {
             const deleteES6Class = new DeletePatientRecord;
-            deleteES6Class.delete('/webapi/person/patientdetails/' + mrn + '/delete')
+            deleteES6Class.delete('/api/v1/patient/' + mrn + '/delete')
                     //on success the dom is reloaded to repopulate the table with remaining records
                     .then(() => window.location.reload())
                     //on error log the error
