@@ -13,15 +13,15 @@
     </servlet>
     <servlet>
         <servlet-name>loginServlet</servlet-name>
-        <servlet-class>com.m0ckinjay.crud.loginServlet</servlet-class>
+        <servlet-class>com.m0ckinjay.crud.controller.loginServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>logoutServlet</servlet-name>
-        <servlet-class>com.m0ckinjay.crud.logoutServlet</servlet-class>
+        <servlet-class>com.m0ckinjay.crud.controller.logoutServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Jersey Web Application</servlet-name>
-        <url-pattern>/webapi/*</url-pattern>
+        <url-pattern>/api/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>loginServlet</servlet-name>
