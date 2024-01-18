@@ -25,14 +25,15 @@ public class PatientDetailsJPAController {
     }
     
     //method to get patient details by mrn
-    public Patientdetails getPatientdetails(String mrn){
-        EntityManager em = emf.createEntityManager();
+    public static Patientdetails getPatientdetails(String mrn){
+//        EntityManager em = emf.createEntityManager();
+        EntityManager em = EntityManagerCreator.getEntityManager();
         return em.find(Patientdetails.class, mrn);
     }
     
     //method to insert patient records
-    public String insertPatientRecords(Patientdetails newPatientdetails){
-        EntityManager em = emf.createEntityManager();
+    public static String insertPatientRecords(Patientdetails newPatientdetails){
+        EntityManager em = EntityManagerCreator.getEntityManager();
         EntityTransaction trans = em.getTransaction();
         String status = null;
         
@@ -51,8 +52,8 @@ public class PatientDetailsJPAController {
         return status;
     }
     //method to obtain all patients with their details
-    public List<Patientdetails> getPatientData(){
-        EntityManager em = emf.createEntityManager();
+    public static List<Patientdetails> getPatientData(){
+        EntityManager em = EntityManagerCreator.getEntityManager();
         TypedQuery<Patientdetails> allPatientDetailsQuery = em.createNamedQuery("Patientdetails.findAll", Patientdetails.class);
         List<Patientdetails> patientData = allPatientDetailsQuery.getResultList();
         return patientData;
