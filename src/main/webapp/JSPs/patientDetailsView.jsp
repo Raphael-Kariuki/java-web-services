@@ -17,7 +17,7 @@
         <script>
     
    
-            fetch("/webapi/person/patientdetails/all/get")
+            fetch("/api/v1/patient/all/get")
                     .then((response) => response.json())
                     .then((data) => {
                     console.log(data);
@@ -25,7 +25,9 @@
                     var table = "";
                     for (var i = 0; i < data.length; i++) {
                     var mrn = data[i].mrn;
-                    var patientFullNames = data[i].pfirstname + " " + data[i].pmiddlname + " " + data[i].plastname;
+                    var patientFullNames = data[i].pfirstname + " " + data[i].pmiddlename + " " + data[i].plastname;
+                    console.log(new Date() - data[i].pdob);
+                    //TODO - Date formatting
                     var page = data[i].pdob;
                     var pphonenumber = data[i].pphonenumber;
                     table += "<tr>";
