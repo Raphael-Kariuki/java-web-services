@@ -14,6 +14,14 @@
         <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 
 
+        <!--#15b5ed-->
+        <!--#06267b-->
+        <!--#0e1e2a-->
+        <!--#104cba-->
+        <!--#73767c - grey black-->
+        <!--font-family - rubik
+        font-size 16px
+        font-color #454545-->
 
         <style>
             * {
@@ -32,11 +40,12 @@
                 top: 0;
                 left: 0;
                 right: 0;
-                background: white;
+                background: none;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
                 z-index: 1000;
+                height: 50px;
             }
             header .logo{
                 font-weight: bolder;
@@ -51,7 +60,7 @@
                 float: left;
             }
             header .navbar ul li a{
-                font-size: 20px;
+                font-size: 16px;
                 padding: 20px;
                 color: #333;
                 display: block;
@@ -124,7 +133,7 @@
                 }
             }
             .container{
-                position: relative;
+                position: fixed;
                 top: 60px;
                 left: 0;
                 right: 0;
@@ -133,7 +142,6 @@
                 grid-template-columns: .9fr 11.1fr;
             }
             .steps{
-                position: relative;
                 display: flex;
                 flex-direction: column;
                 justify-content: space-around;
@@ -170,6 +178,7 @@
 
 
             #regForm {
+              
                 background-color: #ffffff;
                 margin: auto;
                 font-family: Raleway;
@@ -182,7 +191,64 @@
             }
             .row{
                 display: flex;
+                gap: 10%;
+                width: 100%;
+                align-items: center;
                 justify-content: space-between;
+            }
+            .inputs{
+                display: flex;
+                flex-direction: column;
+                gap: 2px;
+            }
+            .genderRadios > div, .maritalStatusRadios > div,.nokPerson{
+                display: flex;
+            }
+            .genderRadios > div > label, .maritalStatusRadios > div > label, .nokPerson > label{
+                display: flex;
+                margin-right: 5px;
+            }
+            input[type="radio"]{
+                margin-right: 5px;
+
+            }
+            select{
+                border: none;
+                outline: none;
+                resize: none;
+                padding: 13px 22px;
+                border-radius: 5px;
+                border: 1px solid #DDE3EC;
+                background: #FFFFFF;
+                font-weight: 500;
+                font-size: 16px;
+                color: #07074D;
+            }              
+            input[type="text"],input[type="date"], input[type="tel"]{
+                border: none;
+                outline: none;
+                resize: none;
+                padding: 13px 22px;
+                border-radius: 5px;
+                border: 1px solid #DDE3EC;
+                background: #FFFFFF;
+                font-weight: 500;
+                font-size: 16px;
+                color: #07074D;
+                width: 100%;
+            }
+             input[type="text"]::placeholder,input[type="date"]::placeholder,input[type="tel"]::placeholder {
+                color: #536387;
+            }
+            input[type="text"]:focus,input[type="date"]:focus,input[type="tel"]:focus {
+                border-color: #6a64f1;
+                box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.05);
+            }
+            label {
+                color: #00000;
+                font-size: 14px;
+                line-height: 24px;
+                display: block;
                 margin-bottom: 10px;
             }
             .row input{
@@ -193,14 +259,6 @@
                 text-align: center;
             }
 
-            input {
-                padding: 10px;
-                width: 100%;
-                font-size: 17px;
-                font-family: Raleway;
-                border: 1px solid #aaaaaa;
-                border-radius: 5px;
-            }
             input[type="date"] + span::after{
                 padding-left: 5px;
             }
@@ -352,8 +410,8 @@
                         </div>
                     </div>
                     <div class="row">
-                        <p><input class="2save" placeholder="Last name..." oninput="this.className = ''" name="ptLname"></p>
-                        <p><input class="2save" placeholder="Other names..." oninput="this.className = ''" name="ptOtherNames"></p>
+                        <input type="text" class="2save" placeholder="Last name..." oninput="this.className = ''" name="ptLname">
+                        <input type="text" class="2save" placeholder="Other names..." oninput="this.className = ''" name="ptOtherNames">
                     </div>
                     <div class="row">
                         <div class="inputs">
@@ -367,48 +425,59 @@
                                 <option value="Dopc">Dopc</option>
                                 <option value="Ent">Ent</option>
                                 <option value="Eye">Eye</option>
-                            </select>   
+                            </select>  
                         </div>
-                        <p><input class="2save" placeholder="C Sheet Number..." oninput="this.className = ''" name="ptCSheetNo"></p>
+                        <div class="inputs">
+                        <input type="text" class="2save" placeholder="C Sheet Number..." oninput="this.className = ''" name="ptCSheetNo">
+                        </div>
                     </div>
                     <div class="row">
-                        <div class="inputs">
+                        <div class="inputs genderRadios">
                             <label>Gender</label>
 
 
-                            <label for="ptGenderM">
-                                <input class="2save" id="ptGenderM" type="radio"  name="ptGender" value="Male"/>
-                                Male     
-                            </label>
-                            <label for="ptGenderF">
-                                <input class="2save" id="ptGenderF" type="radio"  name="ptGender" value="Female"/>
-                                Female     
-                            </label>
+                            <div>
+                                <label for="ptGenderM">
+                                    <input class="2save" id="ptGenderM" type="radio"  name="ptGender" value="Male"/>
+                                    Male 
+                                </label>
+                                <label for="ptGenderF">
+                                    <input class="2save" id="ptGenderF" type="radio"  name="ptGender" value="Female"/>
+                                    Female     
+                                </label>
+                            </div>
                         </div>
-                        <div class="inputs maritalStatus    ">
+                    </div>
+                    <div class="row">
+                        <div class="inputs maritalStatusRadios">
                             <label >Marital status </label>
 
-                            <label for="ptMaritalStatusS">
-                                <input class="2save" id="ptMaritalStatusS" type="radio"  name="ptMaritalStatus" value="Single"/>
+                            <div>
+                                <label for="ptMaritalStatusS">
+                                    <input class="2save" id="ptMaritalStatusS" type="radio"  name="ptMaritalStatus" value="Single"/>
 
-                                Single  </label>
+                                    Single  
+                                </label>
 
-                            <label for="ptMaritalStatusM">
-                                <input class="2save" id="ptMaritalStatusM" type="radio"  name="ptMaritalStatus" value="Married"/>
+                                <label for="ptMaritalStatusM">
+                                    <input class="2save" id="ptMaritalStatusM" type="radio"  name="ptMaritalStatus" value="Married"/>
 
-                                Married  </label>
+                                    Married 
+                                </label>
 
 
-                            <label for="ptMaritalStatusD">
-                                <input class="2save" id="ptMaritalStatusD" type="radio"  name="ptMaritalStatus" value="Divorced"/>
+                                <label for="ptMaritalStatusD">
+                                    <input class="2save" id="ptMaritalStatusD" type="radio"  name="ptMaritalStatus" value="Divorced"/>
 
-                                Divorced </label>
+                                    Divorced 
+                                </label>
 
-                            <label for="ptMaritalStatusW">
-                                <input class="2save" id="ptMaritalStatusW" type="radio"  name="ptMaritalStatus" value="Widowed"/>
+                                <label for="ptMaritalStatusW">
+                                    <input class="2save" id="ptMaritalStatusW" type="radio"  name="ptMaritalStatus" value="Widowed"/>
 
-                                Widowed</label>
-
+                                    Widowed
+                                </label>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -450,9 +519,9 @@
 
                 </div>
                 <div class="tab">Contact Info:
-                    <p><input class="2save" placeholder="ID Number..." oninput="this.className = ''" name="ptIDNo"></p>
-                    <p><input class="2save" placeholder="E-mail..." oninput="this.className = ''" name="ptEmailAddress"></p>
-                    <p><input class="2save" placeholder="Phone..." oninput="this.className = ''" name="ptPhoneNumber"></p>
+                    <input type="text" class="2save" placeholder="ID Number..." oninput="this.className = ''" name="ptIDNo">
+                    <input type="text" class="2save" placeholder="E-mail..." oninput="this.className = ''" name="ptEmailAddress">
+                    <input type="text" class="2save" placeholder="Phone..." oninput="this.className = ''" name="ptPhoneNumber">
                 </div>
                 <div class="tab">Patient residence details:
                     <div class="inputs">
@@ -479,42 +548,45 @@
                             <option value="Igoji">Igoji</option>
                         </select>
                     </div>
-                    <p><input class="2save" placeholder="Postal address" oninput="this.className = ''" name="ptPostalAddress"></p>
-                    <p><input class="2save" placeholder="Home Village" oninput="this.className = ''" name="ptHomeVillage"></p>
-                    <p><input class="2save" placeholder="Physical residence" oninput="this.className = ''" name="ptPhysicalResidence"></p>
-                    <p><input class="2save" placeholder="Place of Birth" oninput="this.className = ''" name="ptPlaceOfBirth"></p>
+                    <input type="text" class="2save" placeholder="Postal address" oninput="this.className = ''" name="ptPostalAddress">
+                    <input type="text" class="2save" placeholder="Home Village" oninput="this.className = ''" name="ptHomeVillage">
+                    <input type="text" class="2save" placeholder="Physical residence" oninput="this.className = ''" name="ptPhysicalResidence">
+                    <input type="text" class="2save" placeholder="Place of Birth" oninput="this.className = ''" name="ptPlaceOfBirth">
                 </div>
                 <div class="tab">Patient other Details:
                     <div class="inputs">
                         <label class="form-control" >
-                            <input class="2save" id="ptNHIFRegistered" type="checkbox"  name="ptNHIFRegistered" value="isNHIFregistered"/>
+                            <input  class="2save" id="ptNHIFRegistered" type="checkbox"  name="ptNHIFRegistered" value="isNHIFregistered"/>
                             NHIF registered
                         </label>
                         <input class="2save isNHIFRegisteredDependendents" id="ptNHIFRegisteredChildren" type="text"  name="ptNHIFRegisteredChildren" placeholder="No of children" />
                     </div>
-                    <p><input class="2save isNHIFRegisteredDependendents" placeholder="NHIF claim number" oninput="this.className = ''" type="text" name="ptNHIFClaimNo" ></p>
-                    <p><input class="2save" placeholder="Old file number" oninput="this.className = ''" type="text" name="ptOldFileNumber"></p>
-                    <p><input class="2save" placeholder="Other numbers" oninput="this.className = ''" type="text" name="ptOtherNo"></p>
+                    <input class="2save isNHIFRegisteredDependendents" placeholder="NHIF claim number" oninput="this.className = ''" type="text" name="ptNHIFClaimNo" >
+                    <input class="2save" placeholder="Old file number" oninput="this.className = ''" type="text" name="ptOldFileNumber">
+                    <input class="2save" placeholder="Other numbers" oninput="this.className = ''" type="text" name="ptOtherNo">
                 </div>
                 <div class="tab">Next of kin details:
-                    <div class="inputs"> 
-                        <input class="2save" id="ptBroughtByNOK" type="radio"   value="NOK" name="ptBroughtBy"/>
-                        <label for="ptBroughtByNOK"> Next of Kin </label>
-                        <input class="2save" id="ptBroughtByGoodSamaritan" type="radio" value="GoodSamaritan"  name="ptBroughtBy"/>
-                        <label for="ptBroughtByGoodSamaritan"> Good samaritan </label>
-
+                    <div class="inputs "> 
+                        <div class="nokPerson">
+                         <label for="ptBroughtByNOK"> 
+                             <input class="2save" id="ptBroughtByNOK" type="radio"   value="NOK" name="ptBroughtBy"/>
+                             Next of Kin </label>
+                         <label for="ptBroughtByGoodSamaritan">
+                             <input class="2save" id="ptBroughtByGoodSamaritan" type="radio" value="GoodSamaritan"  name="ptBroughtBy"/>
+                             Good samaritan </label>
+                        </div>
                     </div>
-                    <p><input class="2save" placeholder="NOK Full Name..." oninput="this.className = ''" name="ptNOKFullName" type="text"></p>
-                    <p><input class="2save" placeholder="NOK Relation..." oninput="this.className = ''" name="ptNOKRelation" type="text"></p>
-                    <p><input class="2save" placeholder="NOK ID/Passport No..." oninput="this.className = ''" name="ptNOKID_PassportNo" type="text"></p>
-                    <p><input class="2save" placeholder="NOK Phone No..." oninput="this.className = ''" name="ptNOKPhoneNo" type="tel"></p>
-                    <p><input class="2save" placeholder="NOK Postal Address..." oninput="this.className = ''" name="ptNOKPostalAddress" type="text"></p>
-                    <p><input class="2save" placeholder="NOK Physical Residence..." oninput="this.className = ''" name="ptNOKPhysicalResidence" type="text"></p>
+                    <input class="2save" placeholder="NOK Full Name..." oninput="this.className = ''" name="ptNOKFullName" type="text">
+                    <input class="2save" placeholder="NOK Relation..." oninput="this.className = ''" name="ptNOKRelation" type="text">
+                    <input class="2save" placeholder="NOK ID/Passport No..." oninput="this.className = ''" name="ptNOKID_PassportNo" type="text">
+                    <input class="2save" placeholder="NOK Phone No..." oninput="this.className = ''" name="ptNOKPhoneNo" type="tel">
+                    <input class="2save" placeholder="NOK Postal Address..." oninput="this.className = ''" name="ptNOKPostalAddress" type="text">
+                    <input class="2save" placeholder="NOK Physical Residence..." oninput="this.className = ''" name="ptNOKPhysicalResidence" type="text">
                 </div>
                 <div class="tab">Referral Details:
-                    <p><input class="2save" placeholder="Referral type..." oninput="this.className = ''" name="ptReferralType"></p>
-                    <p><input class="2save" placeholder="Referral Facility.." oninput="this.className = ''" name="ptReferralfacility"></p>
-                    <p><input class="2save" placeholder="Referral County..." oninput="this.className = ''" name="ptRReferralCounty"></p>
+                    <input type="text" class="2save" placeholder="Referral type..." oninput="this.className = ''" name="ptReferralType">
+                    <input type="text" class="2save" placeholder="Referral Facility.." oninput="this.className = ''" name="ptReferralfacility">
+                    <input type="text" class="2save" placeholder="Referral County..." oninput="this.className = ''" name="ptRReferralCounty">
                 </div>
                 <div style="overflow:auto;">
                     <div style="float:right;">
@@ -575,6 +647,7 @@
                     }
                     if (n === (x.length - 1)) {
                         document.getElementById("nextBtn").innerHTML = "Submit";
+                        //clear session storage
                     } else {
                         document.getElementById("nextBtn").innerHTML = "Next";
                     }
@@ -586,8 +659,8 @@
                     // This function will figure out which tab to display
                     var x = document.getElementsByClassName("tab");
                     // Exit the function if any field in the current tab is invalid:
-                    if (n === 1 && !validateForm())
-                        return false;
+//                    if (n === 1 && !validateForm())
+//                        return false;
                     // Hide the current tab:
                     x[currentTab].style.display = "none";
                     // Increase or decrease the current tab by 1:
