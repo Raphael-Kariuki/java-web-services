@@ -13,7 +13,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
         <link rel="stylesheet" href="../CSS/styles.css"/>
-        <script src="index.js"></script>
 
 
         <!--#15b5ed-->
@@ -72,31 +71,31 @@
                                 2: Decorate font
                                 3: Align items-->
                 <div class="div-step">
-                    <p> Basic info</p>
-                    <span class="step">1</span>
+                    
+                    <span class="step"><span class="step-deco"></span></span><p> Basic info</p>
                 </div>
                 <div class="div-step">
-                    <p> Contact info</p>
-                    <span class="step">2</span>
+                    
+                    <span class="step"><span class="step-deco"></span></span><p> Contact info</p>
                 </div>
                 <div class="div-step">
-                    <p> Location info</p>
-                    <span class="step">3</span>
+                    
+                    <span class="step"><span class="step-deco"></span></span><p> Location info</p>
 
                 </div>
                 <div class="div-step">
-                    <p> Patient Other Details</p>
-                    <span class="step">4</span>
+                   
+                    <span class="step"><span class="step-deco"></span></span> <p> Patient Other Details</p>
 
                 </div>
                 <div class="div-step">
-                    <p> Next of Kin info</p>
-                    <span class="step">5</span>
+                    
+                    <span class="step"><span class="step-deco"></span></span><p> Next of Kin info</p>
 
                 </div>
                 <div class="div-step">
-                    <p> Referral Details</p>
-                    <span class="step">6</span>
+                    
+                    <span class="step"><span class="step-deco"></span></span><p> Referral Details</p>
 
                 </div>
 
@@ -124,8 +123,14 @@
                         </div>
                     </div>
                     <div class="row">
+                           <div class="inputs">
                         <input type="text" class="2save" placeholder="Last name..." oninput="this.className = ''" name="ptLname">
+                    </div>
+                           <div class="inputs">
                         <input type="text" class="2save" placeholder="Other names..." oninput="this.className = ''" name="ptOtherNames">
+                    </div>
+                        
+                        
                     </div>
                     <div class="row">
                         <div class="inputs">
@@ -203,8 +208,10 @@
                         <div class="inputs">
                             <label for="ptDOB"> Date of Birth 
                                 <sup>*</sup>
+                                <span class="specialCaseDoB">
                                 <input class="2save" id="ptDOB" type="date"  name="ptDOB" required />
                                 <span class="validity"></span>
+                                </span>
                             </label>
 
                         </div>
@@ -369,8 +376,8 @@
                     
                     
                 </div>
-                <div style="overflow:auto;">
-                    <div style="float:right;">
+                <div >
+                    <div class="btns" >
                         <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
                         <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
                     </div>
@@ -482,12 +489,14 @@
 
                 function fixStepIndicator(n) {
                     // This function removes the "active" class of all steps...
-                    var i, x = document.getElementsByClassName("step");
+                    var i, x = document.getElementsByClassName("step"),y = document.getElementsByClassName("step-deco");
                     for (i = 0; i < x.length; i++) {
                         x[i].className = x[i].className.replace(" active", "");
+                        y[i].className = y[i].className.replace(" active", "");
                     }
                     //... and adds the "active" class on the current step:
                     x[n].className += " active";
+                    y[n].className += " active";
                 }
                 function temporarySaveFormData() {
                     var x, y, inputsToSave = [];
