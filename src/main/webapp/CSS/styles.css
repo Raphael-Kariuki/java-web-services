@@ -155,6 +155,7 @@ header label{
 .div-step{
     display: flex;
     gap: 10px;
+    align-items: center;
 }
 /* Make circles that indicate the steps of the form: */
 .step {
@@ -170,8 +171,10 @@ header label{
     margin-left: 5px ;
 }
 .step-label{
-    color: #000000;
+    color: #07074D;
     opacity: 0.5;
+    font-weight: 500;
+    font-size: 16px;
 
 }
 .step-label.active{
@@ -223,15 +226,33 @@ header label{
 .row{
     display: flex;
     width: 100%;
-    align-items: center;
+    align-items: end;
     justify-content: space-between;
     padding-bottom: 20px;
     gap: 10%;
 }
 .inputs{
+    position: relative;
     display: flex;
     flex-direction: column;
     width: 100%;
+}
+.input-label{
+    position: absolute;
+    top: 13px;
+    left: 22px;
+    cursor: none;
+    pointer-events: none;
+    opacity: 0.5;
+}
+input[type="text"]:focus + .input-label,input[type="tel"]:focus + .input-label{
+    transform: translateX(-13px) translateY(-22px);
+    background: var(--color-white);
+    border-left: 2px solid var(--color-input-border);
+    border-right: 2px solid var(--color-input-border);
+    padding-left: 5px;
+    padding-right: 5px;
+    opacity: 1;
 }
 .specialCaseDoB {
     display: flex;
@@ -287,6 +308,7 @@ input[type="text"]:focus,input[type="date"]:focus,input[type="tel"]:focus {
     border-color: #6a64f1;
     box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.05);
 }
+
 label {
     color: #000000;
     font-size: 14px;
@@ -361,5 +383,6 @@ button:hover {
     --color-quatre: #104cba;
     --color-cinq: #73767c;
     --color-six: #454545;
-    --color-sept: #ffffff;
+    --color-white: #ffffff;
+    --color-input-border: #6a64f1
 }
