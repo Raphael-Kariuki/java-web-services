@@ -169,15 +169,26 @@ header label{
     display: flex;
     gap: 10px;
     align-items: center;
+    
 }
 .div-step.active::before{
     content: "";
     width: 100%;
     height:5px;
-    background: green;
+    background: var(--color-uno);
     position: absolute;
     top: 90%;
     left: 0;
+    z-index: 1000;
+}
+.div-step.finish::before{
+    content: "✓";
+    width: 100%;
+    height:5px;
+    /*background: #737373;*/
+    position: absolute;
+    top: 60%;
+    left: 50%;
     z-index: 1000;
 }
 /* Make circles that indicate the steps of the form: */
@@ -217,9 +228,9 @@ header label{
 }*/
 
 /* Mark the steps that are finished and valid: */
-.step.finish {
+/*.step.finish {
     background-color: var(--color-deux);
-}
+}*/
 
 /*
         <!--#15b5ed-->
@@ -240,7 +251,7 @@ header label{
 #regForm {
     background-color: #ffffff;
     margin: auto;
-    margin-top: 10px;
+    /*margin-top: 10px;*/
     padding: 10px 20px 10px 20px;
     width: 70%;
     /*width: 600px;*/
@@ -250,6 +261,9 @@ header label{
     overflow: auto;
     /*border-radius: 10px;*/
     /*box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.5);*/
+}
+.tab{
+    margin-top: 10px;
 }
 .row{
     display: flex;
@@ -274,7 +288,7 @@ header label{
     opacity: 0.5;
 }
 input[type="text"]:focus + .input-label,input[type="tel"]:focus + .input-label,
-input[type="text"]:valid + .input-label,input[type="tel"]:valid + .input-label{
+.input-required:valid + .input-label{
     transform: translateX(-13px) translateY(-22px);
     background: var(--color-white);
     border-left: 2px solid var(--color-input-border);
@@ -373,7 +387,7 @@ input.invalid {
 }
 
 button {
-    background-color: #04AA6D;
+    background-color: var(--color-uno);
     color: #ffffff;
     border: none;
     padding: 10px 20px;
