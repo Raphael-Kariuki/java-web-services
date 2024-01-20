@@ -17,18 +17,18 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this t
 body {
     background-color: #f1f1f1;
     height: 100vh;
+    display: grid;
+    grid-template-columns: 2fr 10fr;
 }
 header{
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
+ 
     background: none;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: grid;
+    grid-template-rows: 2fr 10fr;
+    /*align-items: center;*/
     z-index: 1000;
-    height: 50px;
+    height: 100vh;
+    /*margin-top: 15px;*/
 }
 header .logo{
     font-weight: bolder;
@@ -40,13 +40,19 @@ header .navbar ul{
 }
 header .navbar ul li{
     position: relative;
-    float: left;
+    /*float: left;*/
+    /*    border-left: 1px solid black;
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;*/
+
 }
 header .navbar ul li a{
     font-size: 16px;
-    padding: 20px;
+    padding: 5px;
     color: #333;
     display: block;
+    text-align: center;
+
 }
 header .navbar ul li a:hover{
     background: #333;
@@ -62,6 +68,7 @@ header .navbar ul li ul{
 header .navbar ul li ul li{
     width: 100%;
     border-top: 1px solid rgba(0,0,0,0.1);
+
 }
 header .navbar ul li ul li ul{
     left: 200px;
@@ -109,7 +116,7 @@ header label{
     header .navbar ul li ul li{
         background: #eee;
         width: 90%;
-        left: 10%;
+        left: -10%;
     }
     #menu-bar:checked ~ .navbar{
         display: initial;
@@ -133,23 +140,25 @@ header label{
         gap: 10px;
     }
 }
-.container{
-    position: fixed;
-    top: 60px;
-    left: 0;
-    right: 0;
-    height: calc(100vh - 60px);
+.main-container{
+    /*    position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;*/
+    height: 100vh;
     display: grid;
-    grid-template-columns: .9fr 11.1fr;
+    grid-template-rows: .9fr 11.1fr;
 }
 .steps{
     display: flex;
-    flex-direction: column;
+    /*flex-direction: column;*/
     justify-content: space-around;
-    min-height: calc(100% - 10px);
-    max-height: calc(100% - 10px);
-    width: 300px;
-    background-color: var(--color-sept);
+    /*    min-height: calc(100% - 10px);
+        max-height: calc(100% - 10px);*/
+    width: calc(100% - 10px);
+    background-color: var(--color-white);
+    margin:10px 0  10px;
+    height: 50px;
 
 }
 .div-step{
@@ -208,7 +217,11 @@ header label{
         font-size 16px
         font-color #454545-->*/
 
-
+.form-container{
+    background: var(--color-white);
+    width: calc(100% - 10px);
+    /*height: calc(100% - 60px);*/
+}
 
 #regForm {
     background-color: #ffffff;
