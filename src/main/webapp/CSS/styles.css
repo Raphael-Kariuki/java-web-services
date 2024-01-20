@@ -1,0 +1,336 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this template
+*/
+/* 
+    Created on : Jan 20, 2024, 3:24:32 AM
+    Author     : mo
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+body {
+    background-color: #f1f1f1;
+    height: 100vh;
+}
+header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    height: 50px;
+}
+header .logo{
+    font-weight: bolder;
+    font-size: 25px;
+    color: #333;
+}
+header .navbar ul{
+    list-style: none;
+}
+header .navbar ul li{
+    position: relative;
+    float: left;
+}
+header .navbar ul li a{
+    font-size: 16px;
+    padding: 20px;
+    color: #333;
+    display: block;
+}
+header .navbar ul li a:hover{
+    background: #333;
+    color: #fff;
+}
+header .navbar ul li ul{
+    position: absolute;
+    left: 0;
+    width: 200px;
+    background: #fff;
+    display: none;
+}
+header .navbar ul li ul li{
+    width: 100%;
+    border-top: 1px solid rgba(0,0,0,0.1);
+}
+header .navbar ul li ul li ul{
+    left: 200px;
+    top:0;
+}
+header .navbar ul li:focus-within > ul,
+header .navbar ul li:hover > ul{
+    display: initial;
+}
+#menu-bar{
+    display: none;
+}
+header label{
+    font-size: 20px;
+    color: #333;
+    cursor: pointer;
+    display: none;
+}
+
+@media(max-width: 991px){
+    header{
+        padding: 20px;
+
+    }
+    header label{
+        display: initial;
+
+    }
+    header .navbar{
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #fff;
+        border-top: 1px solid rgba(0,0,0,0.1);
+        display:none;
+    }
+    header .navbar ul li{
+        width: 100%;
+    }
+    header .navbar ul li ul{
+        position: relative;
+        width: 100%;
+    }
+    header .navbar ul li ul li{
+        background: #eee;
+        width: 90%;
+        left: 10%;
+    }
+    #menu-bar:checked ~ .navbar{
+        display: initial;
+    }
+    #regForm{
+        /*width: 200px;*/
+    }
+    .row{
+        flex-direction: column;
+        align-items: start;
+        padding-bottom: 1px;
+    }
+    .inputs{
+        padding-bottom: 20px;
+    }
+    .genderRadios > div, .maritalStatusRadios > div,.nokPerson{
+        flex-direction: column;
+    }
+    .btns{
+        flex-direction: column;
+
+    }
+}
+.container{
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    height: calc(100vh - 60px);
+    display: grid;
+    grid-template-columns: .9fr 11.1fr;
+}
+.steps{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    min-height: calc(100% - 10px);
+    max-height: calc(100% - 10px);
+    border:1px solid #04AA6D;
+    width: 300px;
+}
+.div-step{
+    display: flex;
+}
+/* Make circles that indicate the steps of the form: */
+.step {
+    height: 30px;
+    width: 30px;
+    background-color: #bbbbbb;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    opacity: 0.5;
+    align-items:  center;
+    justify-content: center;
+    margin-left: 5px ;
+}
+.step > span{
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 50%;
+}
+.step.active {
+    opacity: 1;
+}
+
+/* Mark the steps that are finished and valid: */
+.step.finish {
+    background-color: #04AA6D;
+}
+
+
+
+
+
+
+#regForm {
+    background-color: #ffffff;
+    margin: auto;
+    padding: 10px 20px 10px 20px;
+    width: 70%;
+    /*width: 600px;*/
+    min-width: 200px;
+    max-width: 700px;
+    max-height: 98vh;
+    overflow: auto;
+    border-radius: 10px;
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.5);
+}
+.row{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 20px;
+    gap: 10%;
+}
+.inputs{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.specialCaseDoB {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.genderRadios > div, .maritalStatusRadios > div,.nokPerson{
+    display: flex;
+}
+.genderRadios > div > label, .maritalStatusRadios > div > label, .nokPerson > label{
+    display: flex;
+    margin-right: 5px;
+}
+input[type="radio"]{
+    margin-right: 5px;
+
+}
+select{
+    border: none;
+    outline: none;
+    resize: none;
+    padding: 13px 22px;
+    border-radius: 5px;
+    border: 1px solid #DDE3EC;
+    background: #FFFFFF;
+    font-weight: 500;
+    font-size: 16px;
+    color: #07074D;
+    width: 100%;
+    /*min-width: 200px;*/
+    max-width: 100%;
+}
+input[type="text"],input[type="date"], input[type="tel"]{
+    border: none;
+    outline: none;
+    resize: none;
+    padding: 13px 22px;
+    border-radius: 5px;
+    border: 1px solid #DDE3EC;
+    background: #FFFFFF;
+    font-weight: 500;
+    font-size: 16px;
+    color: #07074D;
+    width: 100%;
+    min-width: 100px;
+    max-width: 100%;
+
+}
+input[type="text"]::placeholder,input[type="date"]::placeholder,input[type="tel"]::placeholder {
+    color: #536387;
+}
+input[type="text"]:focus,input[type="date"]:focus,input[type="tel"]:focus {
+    border-color: #6a64f1;
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.05);
+}
+label {
+    color: #000000;
+    font-size: 14px;
+    line-height: 24px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+
+
+input[type="date"] + span::after{
+    padding-left: 5px;
+}
+input[type="date"]:invalid + span::after{
+    content: "✖";
+}
+input[type="date"]:valid + span::after{
+    content: "✓";
+}
+/* Mark input boxes that gets an error on validation: */
+input.invalid {
+    background-color: #ffdddd;
+}
+
+/* Hide all steps by default: */
+.tab {
+    display: none;
+}
+
+button {
+    background-color: #04AA6D;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+#prevBtn {
+    background-color: #bbbbbb;
+}
+
+.btns{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+
+}
+
+
+/*            @media screen and (max-width: 600px){
+                .container{
+                    display: grid;
+                    grid-template-rows:  1fr 11fr;
+                }
+            .steps{
+             
+                flex-direction: row;
+                justify-content: space-around;
+            }
+            }*/
