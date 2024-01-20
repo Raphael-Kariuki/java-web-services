@@ -23,7 +23,7 @@ body {
     position: fixed;
 }
 header{
- 
+
     background: var(--color-white);
     display: grid;
     grid-template-rows: 2fr 10fr;
@@ -165,12 +165,23 @@ header label{
 
 }
 .div-step{
+    position: relative;
     display: flex;
     gap: 10px;
     align-items: center;
 }
+.div-step.active::before{
+    content: "";
+    width: 100%;
+    height:5px;
+    background: green;
+    position: absolute;
+    top: 90%;
+    left: 0;
+    z-index: 1000;
+}
 /* Make circles that indicate the steps of the form: */
-.step {
+/*.step {
     height: 20px;
     width: 20px;
     background-color: #bbbbbb;
@@ -181,7 +192,7 @@ header label{
     align-items:  center;
     justify-content: center;
     margin-left: 5px ;
-}
+}*/
 .step-label{
     color: #07074D;
     opacity: 0.5;
@@ -192,18 +203,18 @@ header label{
 .step-label.active{
     opacity: 1;
 }
-.step-deco.active{
+/*.step-deco.active{
     position: absolute;
     height: 12px;
     width: 12px;
     background-color: #ffffff;
     border: none;
     border-radius: 50%;
-}
-.step.active {
+}*/
+/*.step.active {
     opacity: 1;
     transform: scale(1.5);
-}
+}*/
 
 /* Mark the steps that are finished and valid: */
 .step.finish {
@@ -237,8 +248,8 @@ header label{
     max-width: 700px;
     max-height: 98vh;
     overflow: auto;
-    border-radius: 10px;
-    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.5);
+    /*border-radius: 10px;*/
+    /*box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.5);*/
 }
 .row{
     display: flex;
@@ -262,7 +273,8 @@ header label{
     pointer-events: none;
     opacity: 0.5;
 }
-input[type="text"]:focus + .input-label,input[type="tel"]:focus + .input-label{
+input[type="text"]:focus + .input-label,input[type="tel"]:focus + .input-label,
+input[type="text"]:valid + .input-label,input[type="tel"]:valid + .input-label{
     transform: translateX(-13px) translateY(-22px);
     background: var(--color-white);
     border-left: 2px solid var(--color-input-border);
@@ -270,6 +282,8 @@ input[type="text"]:focus + .input-label,input[type="tel"]:focus + .input-label{
     padding-left: 5px;
     padding-right: 5px;
     opacity: 1;
+    /*font-size: 12px;*/
+
 }
 .specialCaseDoB {
     display: flex;
@@ -302,6 +316,7 @@ select{
     /*min-width: 200px;*/
     max-width: 100%;
 }
+
 input[type="text"],input[type="date"], input[type="tel"]{
     border: none;
     outline: none;
@@ -316,13 +331,15 @@ input[type="text"],input[type="date"], input[type="tel"]{
     width: 100%;
     min-width: 100px;
     max-width: 100%;
+    transition: 1s ease-in;
 
 }
 input[type="text"]::placeholder,input[type="date"]::placeholder,input[type="tel"]::placeholder {
     color: #536387;
 }
 input[type="text"]:focus,input[type="date"]:focus,input[type="tel"]:focus {
-    border-color: #6a64f1;
+    /*border-color: #6a64f1;*/
+    border: 1px solid #6a64f1;
     box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.05);
 }
 
