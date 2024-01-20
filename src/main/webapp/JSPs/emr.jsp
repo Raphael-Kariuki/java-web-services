@@ -15,14 +15,6 @@
         <link rel="stylesheet" href="../CSS/styles.css"/>
 
 
-        <!--#15b5ed-->
-        <!--#06267b-->
-        <!--#0e1e2a-->
-        <!--#104cba-->
-        <!--#73767c - grey black-->
-        <!--font-family - rubik
-        font-size 16px
-        font-color #454545-->
 
     </head>
     <body>
@@ -64,43 +56,44 @@
 
             </nav>
         </header>
-        <div class="container">
+        <div class="main-container">
             <div class="steps">
                 <!--                TODO: setup layout as follows
                                 1: Set <p> opacity to match that of step
                                 2: Decorate font
                                 3: Align items-->
                 <div class="div-step">
-                    
-                    <span class="step"><span class="step-deco"></span></span><p> Basic info</p>
+
+                    <span class="step"><span class="step-deco"></span></span><p class="step-label"> Basic info</p>
                 </div>
                 <div class="div-step">
-                    
-                    <span class="step"><span class="step-deco"></span></span><p> Contact info</p>
+
+                    <span class="step"><span class="step-deco"></span></span><p class="step-label"> Contact info</p>
                 </div>
                 <div class="div-step">
-                    
-                    <span class="step"><span class="step-deco"></span></span><p> Location info</p>
+
+                    <span class="step"><span class="step-deco"></span></span><p class="step-label"> Location info</p>
 
                 </div>
                 <div class="div-step">
-                   
-                    <span class="step"><span class="step-deco"></span></span> <p> Patient Other Details</p>
+
+                    <span class="step"><span class="step-deco"></span></span> <p class="step-label"> Patient Other Details</p>
 
                 </div>
                 <div class="div-step">
-                    
-                    <span class="step"><span class="step-deco"></span></span><p> Next of Kin info</p>
+
+                    <span class="step"><span class="step-deco"></span></span><p class="step-label"> Next of Kin info</p>
 
                 </div>
                 <div class="div-step">
-                    
-                    <span class="step"><span class="step-deco"></span></span><p> Referral Details</p>
+
+                    <span class="step"><span class="step-deco"></span></span><p class="step-label"> Referral Details</p>
 
                 </div>
 
 
             </div>
+            <div class="form-container">
             <form id="regForm" action="/action_page.php"  >
                 <!-- One "tab" for each step in the form: -->
                 <div class="tab">
@@ -123,14 +116,17 @@
                         </div>
                     </div>
                     <div class="row">
-                           <div class="inputs">
-                        <input type="text" class="2save" placeholder="Last name..." oninput="this.className = ''" name="ptLname">
-                    </div>
-                           <div class="inputs">
-                        <input type="text" class="2save" placeholder="Other names..." oninput="this.className = ''" name="ptOtherNames">
-                    </div>
-                        
-                        
+                        <div class="inputs">
+                            <input type="text" class="2save input-required"  oninput="this.className = ''" name="ptLname" required>
+                            <span class="input-label">Last name</span>
+
+                        </div>
+                        <div class="inputs">
+                            <input type="text" class="2save input-required"  oninput="this.className = ''" name="ptOtherNames" required>
+                            <span class="input-label">Other names</span>
+                        </div>
+
+
                     </div>
                     <div class="row">
                         <div class="inputs">
@@ -147,7 +143,8 @@
                             </select>  
                         </div>
                         <div class="inputs">
-                        <input type="text" class="2save" placeholder="C Sheet Number..." oninput="this.className = ''" name="ptCSheetNo">
+                            <input type="text" class="2save input-required"  oninput="this.className = ''" name="ptCSheetNo" required>
+                            <span class="input-label">C Sheet Number</span>
                         </div>
                     </div>
                     <div class="row">
@@ -209,8 +206,8 @@
                             <label for="ptDOB"> Date of Birth 
                                 <sup>*</sup>
                                 <span class="specialCaseDoB">
-                                <input class="2save" id="ptDOB" type="date"  name="ptDOB" required />
-                                <span class="validity"></span>
+                                    <input class="2save" id="ptDOB" type="date"  name="ptDOB" required />
+                                    <span class="validity"></span>
                                 </span>
                             </label>
 
@@ -241,140 +238,220 @@
                 </div>
                 <div class="tab">Contact Info:
                     <div class="row">
-                        <input type="text" class="2save" placeholder="ID Number..." oninput="this.className = ''" name="ptIDNo">
-                    </div>
-                       <div class="row">
-                        <input type="text" class="2save" placeholder="E-mail..." oninput="this.className = ''" name="ptEmailAddress">
-                    </div>
-                       <div class="row">
-                        <input type="text" class="2save" placeholder="Phone..." oninput="this.className = ''" name="ptPhoneNumber">
-                    </div>
-                    
-                    
-                </div>
-                <div class="tab">Patient residence details:
-                       <div class="row">
-                                  <div class="inputs">
-                        <label for="ptNationality">Nationality</label>
-                        <select class="2save"  id="ptNationality" name="ptNationality" required >
-                            <option value="">Select</option>
-                            <option value="Kenya">Kenya</option>
-                            <option value="Uganda">Uganda</option>
-
-                        </select>
-                    </div>
-                    </div>
-             <div class="row">
-                                 <div class="inputs">
-                        <label for="ptCounty">County</label>
-                        <select class="2save" id="ptCounty" name="ptCounty" required >
-                            <option value="">Select</option>
-                            <option value="Garissa">Garissa</option>
-                        </select>
-                    </div>
-
-                    <div class="inputs">
-                        <label for="ptSubCounty">Sub County</label>
-                        <select class="2save" id="ptSubCounty" name="ptSubCounty" required >
-                            <option value="">Select</option>
-                            <option value="Igoji">Igoji</option>
-                        </select>
-                    </div>
-                    </div>
-              <div class="row">
-                        <input type="text" class="2save" placeholder="Postal address" oninput="this.className = ''" name="ptPostalAddress">
-                    </div>
-                       <div class="row">
-                        <input type="text" class="2save" placeholder="Home Village" oninput="this.className = ''" name="ptHomeVillage">
-                    </div>
-                       <div class="row">
-                        <input type="text" class="2save" placeholder="Physical residence" oninput="this.className = ''" name="ptPhysicalResidence">
-                    </div>
-                       <div class="row">
-                        <input type="text" class="2save" placeholder="Place of Birth" oninput="this.className = ''" name="ptPlaceOfBirth">
-                    </div>
-                    
-                    
-                    
-                    
-                </div>
-                <div class="tab">Patient other Details:
-                       <div class="row">
-                              <div class="inputs">
-                        <label class="form-control" >
-                            <input  class="2save" id="ptNHIFRegistered" type="checkbox"  name="ptNHIFRegistered" value="isNHIFregistered"/>
-                            NHIF registered
-                        </label>
-                        <input class="2save isNHIFRegisteredDependendents" id="ptNHIFRegisteredChildren" type="text"  name="ptNHIFRegisteredChildren" placeholder="No of children" />
-                    </div>
-                    </div>
-                       <div class="row">
-                        <input class="2save isNHIFRegisteredDependendents" placeholder="NHIF claim number" oninput="this.className = ''" type="text" name="ptNHIFClaimNo" >
-                    </div>
-                       <div class="row">
-                        <input class="2save" placeholder="Old file number" oninput="this.className = ''" type="text" name="ptOldFileNumber">
-                    </div>
-                       <div class="row">
-                        <input class="2save" placeholder="Other numbers" oninput="this.className = ''" type="text" name="ptOtherNo">
-                    </div>
-               
-              
-                    
-                    
-                    
-                </div>
-                <div class="tab">Next of kin details:
-                       <div class="row">
-                                <div class="inputs "> 
-                        <div class="nokPerson">
-                         <label for="ptBroughtByNOK"> 
-                             <input class="2save" id="ptBroughtByNOK" type="radio"   value="NOK" name="ptBroughtBy"/>
-                             Next of Kin </label>
-                         <label for="ptBroughtByGoodSamaritan">
-                             <input class="2save" id="ptBroughtByGoodSamaritan" type="radio" value="GoodSamaritan"  name="ptBroughtBy"/>
-                             Good samaritan </label>
+                        <div class="inputs">
+                        <input type="text" class="2save input-required"  oninput="this.className = ''" name="ptIDNo" required>
+                        <span class="input-label">ID Number</span>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="inputs">
+                        <input type="text" class="2save input-required" oninput="this.className = ''" name="ptEmailAddress" required>
+                        <span class="input-label">E-mail</span>
+                        </div>
                     </div>
-                       <div class="row">
-                        <input class="2save" placeholder="NOK Full Name..." oninput="this.className = ''" name="ptNOKFullName" type="text">
+                    <div class="row">
+                        <div class="inputs">
+                        <input type="text" class="2save input-required" oninput="this.className = ''" name="ptPhoneNumber" required>
+                        <span class="input-label">Phone Number</span>
+                        </div>
                     </div>
-                       <div class="row">
-                        <input class="2save" placeholder="NOK Relation..." oninput="this.className = ''" name="ptNOKRelation" type="text">
+
+
+                </div>
+                <div class="tab">Patient residence details:
+                    <div class="row">
+                        <div class="inputs">
+                            <label for="ptNationality">Nationality</label>
+                            <select class="2save"  id="ptNationality" name="ptNationality" required >
+                                <option value="">Select</option>
+                                <option value="Kenya">Kenya</option>
+                                <option value="Uganda">Uganda</option>
+
+                            </select>
+                        </div>
                     </div>
-                       <div class="row">
-                        <input class="2save" placeholder="NOK ID/Passport No..." oninput="this.className = ''" name="ptNOKID_PassportNo" type="text">
+                    <div class="row">
+                        <div class="inputs">
+                            <label for="ptCounty">County</label>
+                            <select class="2save" id="ptCounty" name="ptCounty" required >
+                                <option value="">Select</option>
+                                <option value="Garissa">Garissa</option>
+                            </select>
+                        </div>
+
+                        <div class="inputs">
+                            <label for="ptSubCounty">Sub County</label>
+                            <select class="2save" id="ptSubCounty" name="ptSubCounty" required >
+                                <option value="">Select</option>
+                                <option value="Igoji">Igoji</option>
+                            </select>
+                        </div>
                     </div>
-                       <div class="row">
-                        <input class="2save" placeholder="NOK Phone No..." oninput="this.className = ''" name="ptNOKPhoneNo" type="tel">
+                    <div class="row">
+                        <div class="inputs">
+                            <input type="text" class="2save input-required" oninput="this.className = ''" name="ptPostalAddress" required>
+                            <span class="input-label">Postal address</span>
+                        </div>
+                        
                     </div>
-                       <div class="row">
-                        <input class="2save" placeholder="NOK Postal Address..." oninput="this.className = ''" name="ptNOKPostalAddress" type="text">
+                    <div class="row">
+                          <div class="inputs">
+                            <input type="text" class="2save input-required" oninput="this.className = ''" name="ptHomeVillage" required>
+                            <span class="input-label">Home Village</span>
+                        </div>
+                        
                     </div>
-                       <div class="row">
-                        <input class="2save" placeholder="NOK Physical Residence..." oninput="this.className = ''" name="ptNOKPhysicalResidence" type="text">
+                    <div class="row">
+                          <div class="inputs">
+                            <input type="text" class="2save input-required" oninput="this.className = ''" name="ptPhysicalResidence" required>
+                                  <span class="input-label">Physical residence</span>
+                        </div>
+                        
                     </div>
-            
-                    
-                    
-                    
-                    
-                    
-                    
+                    <div class="row">
+                          <div class="inputs">
+                            <input type="text" class="2save input-required" oninput="this.className = ''" name="ptPlaceOfBirth" required>
+                             <span class="input-label">Place of Birth</span>
+                        </div>
+                        
+                    </div>
+
+
+
+
+                </div>
+                <div class="tab">Patient other Details:
+                    <div class="row">
+                        <div class="inputs">
+                            <label class="form-control" >
+                                <input  class="2save" id="ptNHIFRegistered" type="checkbox"  name="ptNHIFRegistered" value="isNHIFregistered"/>
+                                NHIF registered
+                            </label>
+                            
+                        </div>
+                    </div>
+                    <div class="row">
+                          <div class="inputs">
+                            <input class="2save isNHIFRegisteredDependendents" id="ptNHIFRegisteredChildren" type="text"  name="ptNHIFRegisteredChildren" />
+                            <span class="input-label">No of children</span>
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                          <div class="inputs">
+                            <input class="2save isNHIFRegisteredDependendents"  oninput="this.className = ''" type="text" name="ptNHIFClaimNo" >
+                            <span class="input-label">NHIF claim number</span>
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                          <div class="inputs">
+                            <input class="2save"  oninput="this.className = ''" type="text" name="ptOldFileNumber">
+                            <span class="input-label">Old file number</span>
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                          <div class="inputs">
+                            <input class="2save"  oninput="this.className = ''" type="text" name="ptOtherNo">
+                            <span class="input-label">Other numbers</span>
+                        </div>
+                        
+                    </div>
+
+
+
+
+
+                </div>
+                <div class="tab">Next of kin details:
+                    <div class="row">
+                        <div class="inputs "> 
+                            <div class="nokPerson">
+                                <label for="ptBroughtByNOK"> 
+                                    <input class="2save" id="ptBroughtByNOK" type="radio"   value="NOK" name="ptBroughtBy"/>
+                                    Next of Kin </label>
+                                <label for="ptBroughtByGoodSamaritan">
+                                    <input class="2save" id="ptBroughtByGoodSamaritan" type="radio" value="GoodSamaritan"  name="ptBroughtBy"/>
+                                    Good samaritan </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                          <div class="inputs">
+                              <input class="2save"  oninput="this.className = ''" name="ptNOKFullName" type="text" required>
+                             <span class="input-label">NOK Full Name</span>
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                          <div class="inputs">
+                            <input class="2save"  oninput="this.className = ''" name="ptNOKRelation" type="text" required>
+                            <span class="input-label">NOK Relation</span>
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                          <div class="inputs">
+                            <input class="2save input-required"  oninput="this.className = ''" name="ptNOKID_PassportNo" type="text" required>
+                            <span class="input-label">NOK ID/Passport No</span>
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                          <div class="inputs">
+                            <input class="2save input-required"  oninput="this.className = ''" name="ptNOKPhoneNo" type="tel" required>
+                            <span class="input-label">NOK Phone No</span>
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                          <div class="inputs">
+                          <input class="2save input-required" oninput="this.className = ''" name="ptNOKPostalAddress" type="text" required>  
+                          <span class="input-label">NOK Postal Address</span>
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                          <div class="inputs">
+                            <input class="2save input-required" oninput="this.className = ''" name="ptNOKPhysicalResidence" type="text" required>
+                            <span class="input-label">NOK Physical Residence</span>
+                        </div>
+                        
+                    </div>
+
+
+
+
+
+
+
                 </div>
                 <div class="tab">Referral Details:
-                       <div class="row">
-                        <input type="text" class="2save" placeholder="Referral type..." oninput="this.className = ''" name="ptReferralType">
+                    <div class="row">
+                          <div class="inputs">
+                            <input type="text" class="2save" oninput="this.className = ''" name="ptReferralType">
+                            <span class="input-label">Referral type</span>
+                        </div>
+                        
                     </div>
-                       <div class="row">
-                        <input type="text" class="2save" placeholder="Referral Facility.." oninput="this.className = ''" name="ptReferralfacility">
+                    <div class="row">
+                          <div class="inputs">
+                            <input type="text" class="2save"  oninput="this.className = ''" name="ptReferralfacility">
+                            <span class="input-label">Referral Facility</span>
+                        </div>
+                        
                     </div>
-                       <div class="row">
-                        <input type="text" class="2save" placeholder="Referral County..." oninput="this.className = ''" name="ptRReferralCounty">
+                    <div class="row">
+                          <div class="inputs">
+                            <input type="text" class="2save" oninput="this.className = ''" name="ptRReferralCounty">
+                            <span class="input-label">Referral County</span>
+                        </div>
+                        
                     </div>
-                    
-                    
-                    
+
+
+
                 </div>
                 <div >
                     <div class="btns" >
@@ -385,7 +462,7 @@
                 <!-- Circles which indicates the steps of the form: -->
 
             </form>
-
+            </div>
             <script>
                 //TODO set readOnly for NHIF registered dependants works on the first reload, fails after. To check
                 const ptNHIFRegisteredCheckBox = document.getElementById('ptNHIFRegistered');
@@ -489,14 +566,21 @@
 
                 function fixStepIndicator(n) {
                     // This function removes the "active" class of all steps...
-                    var i, x = document.getElementsByClassName("step"),y = document.getElementsByClassName("step-deco");
+                    var i, x = document.getElementsByClassName("step"),
+                            y = document.getElementsByClassName("step-deco"),
+                            z = document.getElementsByClassName("step-label"),
+                            a = document.getElementsByClassName("div-step");
                     for (i = 0; i < x.length; i++) {
                         x[i].className = x[i].className.replace(" active", "");
                         y[i].className = y[i].className.replace(" active", "");
+                        z[i].className = z[i].className.replace(" active", "");
+                        a[i].className = a[i].className.replace(" active", "");
                     }
                     //... and adds the "active" class on the current step:
                     x[n].className += " active";
                     y[n].className += " active";
+                    z[n].className += " active";
+                    a[n].className += " active";
                 }
                 function temporarySaveFormData() {
                     var x, y, inputsToSave = [];
